@@ -16,14 +16,14 @@
                         </li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-bulb"></span><p>Categories</p><span class="arrow"></span></a>
                             <ul class="sub-menu">
-                                <li><a href="inbox.html">Add New Category</a></li>
-                                <li><a href="message-view.html">Show All Categories</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>categories/create.php">Add New Category</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>categories/index.php">Show All Categories</a></li>
                             </ul>
                         </li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-chemistry"></span><p>Brands</p><span class="arrow"></span></a>
                             <ul class="sub-menu">
-                                <li><a href="inbox.html">Add New Brand</a></li>
-                                <li><a href="message-view.html">Show All Brands</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>brands/create.php">Add New Brand</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>brands/index.php">Show All Brands</a></li>
                             </ul>
                         </li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-bar-chart"></span><p>Orders</p><span class="arrow"></span></a>
@@ -32,6 +32,7 @@
                                 <li><a href="message-view.html">Delivered Orders</a></li>
                             </ul>
                         </li>
+                        <li class=""><a href="<?php echo(BASE_URL); ?>messages/index.php" class="waves-effect waves-button"><span class="menu-icon icon-envelope"></span><p>Messages</p></a>
                         <li class=""><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-pie-chart"></span><p>Reports</p></a>
                         </li>
                     </ul>

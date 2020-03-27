@@ -2,13 +2,13 @@
 require_once "../../models/Admin.php";
 require_once "../views/header.php";
 require_once "../views/sidebar.php";
-require_once "../../models/Brand.php";
+require_once "../../models/Message.php";
 ?>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-white">
             <div class="panel-heading clearfix">
-                <h4 class="panel-title">Brands List</h4>
+                <h4 class="panel-title">Messages List</h4>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -16,27 +16,24 @@ require_once "../../models/Brand.php";
                     <thead>
                         <tr>
                             <th>Sr.No</th>
-                            <th>Brand Name</th>
-                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
                         $i = 1;
-                        $brands = Brand::getBrands();
-                        foreach($brands as $brand){
+                        $messages = Message::getMessages();
+                        foreach($messages as $message){
                             echo("<tr>");
                             echo("<td>".$i++."</td>");
-                            echo("<td>".$brand->name."</td>");
+                            echo("<td>".$message->name."</td>");
+                            echo("<td>".$message->email."</td>");
+                            echo("<td>".$message->message."</td>");
                             echo('<td>
-                            <img src="'.WEB_BASE_URL.'../img/brands/'.$brand->image.'" alt="img" width="50">
-                            </td>');
-                            echo('<td>
-                            <a href="'.BASE_URL.'brands/edit.php?id='.$brand->id.'">
-                                <i class="fa fa-edit" style="color:blue;"></i>
-                            </a>
-                            <a href="'.BASE_URL.'brands/process/process_delete_brand.php?id='.$brand->id.'">
+                            <a href="'.BASE_URL.'messages/process/process_delete_message.php?id='.$message->id.'">
                                 <i class="fa fa-trash" style="color:red;"></i>
                             </a>
                         </td>');

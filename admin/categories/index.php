@@ -2,6 +2,7 @@
 require_once "../../models/Admin.php";
 require_once "../views/header.php";
 require_once "../views/sidebar.php";
+require_once "../../models/Category.php";
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -20,90 +21,25 @@ require_once "../views/sidebar.php";
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Men</td>
-                            <td>
-                                <a href="">
-                                    <i class="fa fa-eye" style="color:green;"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fa fa-edit" style="color:blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Men</td>
-                            <td>
-                                <a href="">
-                                    <i class="fa fa-eye" style="color:green;"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fa fa-edit" style="color:blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Men</td>
-                            <td>
-                                <a href="">
-                                    <i class="fa fa-eye" style="color:green;"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fa fa-edit" style="color:blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Men</td>
-                            <td>
-                                <a href="">
-                                    <i class="fa fa-eye" style="color:green;"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fa fa-edit" style="color:blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Men</td>
-                            <td>
-                                <a href="">
-                                    <i class="fa fa-eye" style="color:green;"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fa fa-edit" style="color:blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Men</td>
-                            <td>
-                                <a href="">
-                                    <i class="fa fa-eye" style="color:green;"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fa fa-edit" style="color:blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Men</td>
-                            <td>
-                                <a href="">
-                                    <i class="fa fa-eye" style="color:green;"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fa fa-edit" style="color:blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        <?php
+                        $i = 1;
+                        $categories = Category::getCategories();
+                        foreach($categories as $category){
+                            echo("<tr>");
+
+                            echo("<td>".$i++."</td>");
+                            echo("<td>".$category->name."</td>");
+                            echo('<td>
+                            <a href="'.BASE_URL.'categories/edit.php?id='.$category->id.'">
+                                <i class="fa fa-edit" style="color:blue;"></i>
+                            </a>
+                            <a href="'.BASE_URL.'categories/process/process_delete_category.php?id='.$category->id.'">
+                                <i class="fa fa-trash" style="color:red;"></i>
+                            </a>
+                        </td>');
+                            echo("</tr>");
+                        }
+                        ?>
 
                     </tbody>
                     </table>  

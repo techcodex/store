@@ -3,7 +3,7 @@ trait DbTrait{
     public static function obj_db() {
         $host = "localhost";
         $user = "root";
-        $password = "kanwood90a!@";
+        $password = "";
         $database = "store_db";
         $obj_db = new mysqli();
         $obj_db->connect($host,$user,$password);

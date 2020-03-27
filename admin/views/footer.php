@@ -35,7 +35,7 @@
         <script src="<?php echo(BASE_URL); ?>assets/js/pages/table-data.js"></script>
 
         <!-- toastr js -->
-        <script src="<?php echo(BASE_FOLDER); ?>assets/js/toastr.js"></script>
+        <script src="<?php echo(BASE_FOLDER); ?>assets/js/toastr.min.js"></script>
 
         
         <script>
