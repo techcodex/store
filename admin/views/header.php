@@ -51,7 +51,7 @@ if(in_array($current,$restricted_pages) && !$obj_admin->loggedin) {
         <link href="<?php echo(BASE_URL); ?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
         
         <!-- toastr css -->
-        <link href="<?php echo(BASE_URL); ?> assets/css/toastr.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo(BASE_FOLDER); ?>assets/css/toastr.min.css" rel="stylesheet" type="text/css">
 
         <script src="<?php echo(BASE_URL) ?>assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         

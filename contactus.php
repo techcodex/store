@@ -1,6 +1,11 @@
 <?php
 require_once "models/User.php";
 require_once "views/header.php";
+
+if(isset($_SESSION['errors'])) {
+    $errors = $_SESSION['errors'];
+    unset($_SESSION['errors']);
+}
 ?>
 <div class="breadcrumbs">
     <div class="container">
@@ -28,22 +33,21 @@ require_once "views/header.php";
             <div class="col-sm-6 col-md-4">
                 <div class="icon-boxes style1">
                     <div class="icon">
-                        <i class="fa fa-commenting-o text-warning"></i>
+                        <i class="fa fa-phone text-info"></i>
                     </div><!-- end icon -->
                     <div class="box-content">
-                        <h6 class="thin">Need Help?</h6>
-                        <h5 class="text-warning">Use our chat!</h5>
+                        <h6 class="thin">Quick question?</h6>
+                        <h5 class="text-info">Call - +1 (260) 702-1333</h5>
                     </div>
                 </div><!-- icon-box -->
             </div><!-- end col -->
             <div class="col-sm-6 col-md-4">
                 <div class="icon-boxes style1">
                     <div class="icon">
-                        <i class="fa fa-phone text-info"></i>
+                        
                     </div><!-- end icon -->
                     <div class="box-content">
-                        <h6 class="thin">Quick question?</h6>
-                        <h5 class="text-info">Call - 123 456 789!</h5>
+                        
                     </div>
                 </div><!-- icon-box -->
             </div><!-- end col -->
@@ -64,18 +68,33 @@ require_once "views/header.php";
 
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
-                <form>
-                    <div class="form-group">
+                <form action="<?php echo(BASE_URL); ?>process/process_send_message.php" method="POST">
+                    <div class="form-group <?php if(isset($errors['name'])) { echo("has-error"); } ?>">
                         <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control input-lg" placeholder="Name">
+                        <input type="text" id="name" class="form-control input-lg" placeholder="Name" name="name">
+                        <?php
+                            if(isset($errors['name'])) {
+                                echo("<span style='margin-left:1%;' class='text-danger'>".$errors['name']."</span>");
+                            }
+                        ?>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group <?php if(isset($errors['email'])) { echo("has-error"); } ?>">
                         <label for="email">Email Address</label>
-                        <input type="text" id="email" class="form-control input-lg" placeholder="E-mail">
+                        <input type="text" id="email" class="form-control input-lg" placeholder="E-mail" name="email">
+                        <?php
+                            if(isset($errors['email'])) {
+                                echo("<span style='margin-left:1%;' class='text-danger'>".$errors['email']."</span>");
+                            }
+                        ?>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group <?php if(isset($errors['message'])) { echo("has-error"); } ?>">
                         <label class="control-label" for="message">Message</label>
-                        <textarea id="message" rows="6" class="form-control input-lg" placeholder="Message"></textarea>
+                        <textarea id="message" rows="6" class="form-control input-lg" placeholder="Message" name="message"></textarea>
+                        <?php
+                            if(isset($errors['message'])) {
+                                echo("<span style='margin-left:1%;' class='text-danger'>".$errors['message']."</span>");
+                            }
+                        ?>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-default round btn-lg" value="Submit">

@@ -53,8 +53,8 @@
             <div class="row">
                 <div class="col-sm-3">
                     <h5 class="title">Smart Store</h5>
-                    <p>Smart Store is first platform that allow his customer to confirm payment after order delivery so
-                        in that way customer will check weather this is the product that he see online.</p>
+                    <p>Smart Store is first platform that allows their customers to confirm payment after order is delivered.In
+                        this way customer will be able to check weather the product is same as they saw on Store.</p>
 
                     <hr class="spacer-10 no-border">
 

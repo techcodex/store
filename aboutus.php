@@ -22,8 +22,8 @@ require_once "views/header.php";
                     <div class="col-sm-8 col-sm-offset-2">
                         <div class="title-wrap">
                             <h2 class="title lines">About Us</h2>
-                            <p class="lead">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                            <p class="lead">Smart Store is first platform that allows their customers to confirm payment after order is delivered.In
+                        this way customer will be able to check weather the product is same as they saw on Store.</p>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->
@@ -84,7 +84,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
                 <div class="row text-center">
                     <div class="col-sm-8 col-sm-offset-2">
                         <p class="lead text-dark">If you have any questions or concerns, please send us a message, and we'll get you an answare as soon as posible</p>
-                        <a href="contact-v1.html" class="btn btn-default semi-circle btn-md"><i class="fa fa-envelope mr-5"></i> Send a message</a>
+                        <a href="<?php echo(BASE_URL); ?>contactus.php" class="btn btn-default semi-circle btn-md"><i class="fa fa-envelope mr-5"></i> Send a message</a>
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
