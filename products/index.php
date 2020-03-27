@@ -1,11 +1,16 @@
 <?php
+require_once "../models/Cart.php";
 require_once "../models/User.php";
 require_once "../models/Product.php";
+require_once "../models/Category.php";
+require_once "../models/Brand.php";
+require_once "../models/Wishlist.php";
 require_once "../views/header.php";
 $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 $limit = isset($_GET['limit']) ? $_GET['limit'] : ITEM_PER_PAGE;
 $type = isset($_GET['type']) ? $_GET['type'] : "all";
-
+$brand_id = isset($_GET['brand_id']) ? $_GET['brand_id'] : 0;
+$category_id = isset($_GET['category_id']) ? $_GET['category_id'] : 0;
 ?>
 
 <!-- start section -->
@@ -30,39 +35,19 @@ $type = isset($_GET['type']) ? $_GET['type'] : "all";
                         </div>
                 </div><!-- end widget -->
                 <div class="widget">
-                    <h6 class="subtitle">Categories</h6>
+                    <h6 class="subtitle" style="margin-top:5px;">Categories</h6>
 
                     <ul class="list list-unstyled">
-                        <li>
-                            <div class="">
-                                <a href="">Mens</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="">
-                                <a href="">Women</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="">
-                                <a href="">Kids</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="">
-                                <a href="">Sports</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="">
-                                <a href="">Sport Wear</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="">
-                                <a href="">Kids</a>
-                            </div>
-                        </li>
+                        <?php
+                            $categories = Category::getCategories();
+                            foreach($categories as $category) {
+                                echo('<li>');
+                                echo('<div>');
+                                echo("<a href='".BASE_URL."products/index.php?category_id=".$category->id."&brand_id=".$brand_id."&type=".$type."'>".$category->name."</a>");
+                                echo('</div>');
+                                echo('</li>');
+                            }
+                        ?>
                     </ul>
                 </div><!-- end widget -->
                 <div class="widget">
@@ -70,61 +55,49 @@ $type = isset($_GET['type']) ? $_GET['type'] : "all";
                     <h6 class="subtitle">Brands</h6>
 
                     <ul class="list list-unstyled">
-                        <li>
-                            <div class="">
-                                <a href="">Armani</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="">
-                                <a href="">Gucci</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="">
-                                <a href="">Chanel</a>
-                            </div>
-                        </li>
+                        <?php
+                            $brands = Brand::getBrands();
+                            foreach($brands as $brand) {
+                                echo("<li>");
+                                echo("<div>");
+                                echo("<a href='".BASE_URL."products/index.php?category_id=".$category_id."&brand_id=".$brand->id."&type=".$type."'>".$brand->name."</a>");
+                                echo("</div>");
+                                echo("</li>");
+                            }
+                        ?>
                     </ul>
                 </div><!-- end widget -->
                 <div class="widget">
                     <h6 class="subtitle">My Cart</h6>
 
-                    <p>There are 2 items in your cart.</p>
+                    <p>There are <?php echo($obj_cart->count); ?> items in your cart.</p>
                     <hr class="spacer-10">
                     <ul class="items">
-                        <li>
-                            <a href="javascript:void(0);" class="product-image">
-                                <img src="img/products/men_06.jpg" alt="Sample Product ">
-                            </a>
-                            <div class="product-details">
-                                <div class="close-icon">
-                                    <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                </div>
-                                <p class="product-name">
-                                    <a href="javascript:void(0);">Lorem ipsum dolor sit amet Consectetur</a>
-                                </p>
-                                <strong class="text-dark">1</strong> x <span class="price text-primary">$19.99</span>
-                            </div>
-                        </li><!-- end item -->
-                        <li>
-                            <a href="javascript:void(0);" class="product-image">
-                                <img src="img/products/shoes_01.jpg" alt="Sample Product ">
-                            </a>
-                            <div class="product-details">
-                                <div class="close-icon">
-                                    <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                </div>
-                                <p class="product-name">
-                                    <a href="javascript:void(0);">Lorem ipsum dolor sit amet Consectetur</a>
-                                </p>
-                                <strong class="text-dark">1</strong> x <span class="price text-primary">$19.99</span>
-                            </div>
-                        </li><!-- end item -->
+                        <?php
+                            $items = $obj_cart->items;
+                            foreach($items as $item) {
+                                echo('<li>');
+                                echo('<a href="'.BASE_URL.'products/product.php=id='.$item->item_id.'" class="product-image">');
+                                echo('<img src="'.BASE_URL.$item->image.'" alt="img ">');
+                                echo('</a>');
+                                echo('<div class="product-details">');
+                                echo('<div class="close-icon">');
+                                echo('<a href="'.BASE_URL.'products/process/process_cart.php?product_id='.$item->item_id.'&action=remove_item"><i class="fa fa-close"></i></a>');
+                                echo('</div>');
+                                echo('<p class="product-name">');
+                                echo('<a href="'.BASE_URL.'products/product.php?id='.$item->item_id.'">'.ucfirst($item->item_name).'</a>');
+                                echo('</p>');
+                                echo('<strong class="text-dark">'.$item->quantity.'</strong></strong> x <span class="price text-primary">$ '.$item->unit_price.'</span>');
+                                echo('</div>');
+                                echo('</li>');
+                            }
+                        ?>     
+                            
+                        <!-- end item -->
                     </ul>
 
                     <hr class="spacer-10">
-                    <strong class="text-dark">Cart Subtotal:<span class="pull-right text-primary">$19.99</span></strong>
+                    <strong class="text-dark">Cart Subtotal:<span class="pull-right text-primary">$ <?php echo($obj_cart->total);  ?></span></strong>
                     <hr class="spacer-10">
                     <a href="checkout.html" class="btn btn-danger semi-circle btn-block btn-md"><i class="fa fa-shopping-basket mr-10"></i>Checkout</a>
                 </div><!-- end widget -->
@@ -132,7 +105,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : "all";
                     <h6 class="subtitle text-center"><span style="color:darkred;">Smart</span> <span style="color:orange;">Store</span></h6>
                     <figure>
                         <a href="javascript:void(0);">
-                            <img src="img/sslogo.png" alt="collection">
+                            <img src="<?php echo(BASE_URL); ?>img/sslogo.png" alt="collection">
                         </a>
                     </figure>
                 </div><!-- end widget -->
@@ -150,7 +123,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : "all";
 
                 <div class="row column-3">
                     <?php
-                        $products = Product::showAllProducts($limit,$offset,0,0,0,$type);
+                        $products = Product::showAllProducts($limit,$offset,$brand_id,$category_id,0,$type);
                         foreach($products as $product) {
                             echo('<div class="col-sm-6 col-md-4">');
                             echo('<div class="thumbnail store style1">');
@@ -161,8 +134,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : "all";
                             echo('</a>');
                             echo('</figure>');
                             echo('<div class="icons">');
-                            echo('<a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>');
-                            echo('<a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>');
+                            echo('<a class="icon semi-circle" href="'.BASE_URL.'products/process/process_wishlist.php?action=add&product_id='.$product->id.'"><i class="fa fa-heart-o"></i></a>');
                             echo('<a class="icon semi-circle" href="'.BASE_URL.'products/product.php?id='.$product->id.'"><i class="fa fa-search"></i></a>');
                             echo('</div>');
                             echo('</div>');
@@ -171,8 +143,10 @@ $type = isset($_GET['type']) ? $_GET['type'] : "all";
                             echo('<div class="price">');
                             echo('<span class="amount text-danger">$ '.$product->price.'</span>');
                             echo('</div>');
-                            echo('<form>');
-                            echo('<input type="submit" class="btn btn-sm btn-danger" value="Add To Cart">');
+                            echo('<form action="'.BASE_URL.'products/process/process_cart.php" method="post">');
+                            echo('<input type="hidden" name="product_id" value="'.$product->id.'">');
+                            echo('<input type="hidden" name="action" value="add_to_cart">');
+                            echo('<input type="submit" class="btn btn-sm btn-danger semi-circle" value="Add To Cart">');
                             echo('</form>');
                             echo('</div>');
                             echo('</div>');
@@ -189,13 +163,13 @@ $type = isset($_GET['type']) ? $_GET['type'] : "all";
                         <nav>
                             <ul class="pagination">
                                 <?php
-                                    $p_num = Product::pagination(ITEM_PER_PAGE,0,0,0);
+                                    $p_num = Product::pagination(ITEM_PER_PAGE,$brand_id,$category_id,0,$type);
                                     foreach($p_num as $p_no=>$offset) {
                                         $page = $p_no + 1;
                                         if(isset($_GET['offset']) && $_GET['offset'] == $offset) {
                                             echo('<li class="active"><a href="'.BASE_URL.'products/index.php?offset='.$offset.'">'.$page.'</a></li>');
                                         } else {
-                                            echo('<li><a href="'.BASE_URL.'products/index.php?offset='.$offset.'">'.$page.'</a></li>');
+                                            echo('<li><a href="'.BASE_URL.'products/index.php?offset='.$offset.'&category_id='.$category_id.'&brand_id='.$brand_id.'&type='.$type.'">'.$page.'</a></li>');
                                         }
                                         
                                     }
@@ -220,7 +194,7 @@ $(document).ready(function(e) {
             toastr.error("Enter a Product Name You want to search");
             return;
         }
-        window.location.replace("<?php echo(BASE_URL.'products/index.php?type='); ?>"+val);
+        window.location.replace("<?php echo(BASE_URL.'products/index.php?type='); ?>"+val+"&category_id=<?php echo($category_id); ?>&brand_id=<?php echo($brand_id); ?>");
     });
 }); 
 </script>

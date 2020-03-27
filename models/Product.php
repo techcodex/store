@@ -266,12 +266,37 @@ class Product{
     }
     public static function showAllProducts($limit=0,$offset=-1,$brand_id,$category_id,$user_id,$type="all") {
         $obj_db = self::obj_db();
-        
-        $query = "select * from products p ";
+        $query = "select * from products p where status = 1 ";
 
-        if($type != "all") {
-            $query .= " WHERE p.name LIKE '%$type%' ";
+        if($category_id != 0) {
+            $query .= " AND category_id = $category_id ";
         }
+        if($brand_id != 0) {
+            $query .= " AND brand_id = $brand_id ";
+        }
+        if($type != "all") {
+            $query .= " AND name LIKE '%$type%' ";
+        }
+
+        // if($type != "all" && $category_id == 0 && $brand_id == 0) {
+        //     $query .= " WHERE p.name LIKE '%$type%' ";
+        // }
+        // if($brand_id != 0 && $category_id == 0 && $type == "all") {
+        //     $query .= " WHERE brand_id = $brand_id ";
+        // }
+        // if($category_id !=0 && $brand_id != 0 && $type == "all") {
+        //     $query .=" WHERE category_id = $category_id AND brand_id = $brand_id ";
+        // }
+        // if($category_id != "0" && $brand_id != "0" && $type != "all") {
+        //     $query .= " WHERE category_id = $category_id AND brand_id = $brand_id AND name LIKE '%$type%' ";
+        // }
+        // if($category_id != "0" && $brand_id == "0" && $type != "all") {
+        //     $query .= " WHERE category_id = $category_id AND name LIKE '%$type%' ";
+        // }
+        // if($category_id == "0" && $brand_id != "0" && $type != "all") {
+        //     $query .= " WHERE brand_id = $brand_id AND name LIKE '%$type%' ";
+        // }
+        
         if($limit > 0 && $offset > -1) {
             $query .= " limit $limit offset $offset ";
         }
@@ -290,9 +315,18 @@ class Product{
         }
         return $products;
     }
-    public static function pagination($item_per_page=3,$brand_id=0,$category_id=0,$user_id=0) {
+    public static function pagination($item_per_page=3,$brand_id=0,$category_id=0,$user_id=0,$type="all") {
         $obj_db = self::obj_db();
-        $query_count = "select count(*) as count from products ";
+        $query_count = "select count(*) as count from products where status = 1 ";
+        if($category_id != 0) {
+            $query_count .= " AND category_id = $category_id ";
+        }
+        if($brand_id != 0) {
+            $query_count .= " AND brand_id = $brand_id ";
+        }
+        if($type != "all") {
+            $query_count .= " AND name LIKE '%$type%'";
+        }
         $result =  $obj_db->query($query_count);
         
         $data = $result->fetch_object();	

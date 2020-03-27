@@ -1,8 +1,8 @@
 
-<section style="font-size: 20px;background-color: ghostwhite;margin-top:20px;">
+<section style="background-color: ghostwhite;margin-top:20px;">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3" style="font-size: 20px;">
                     <ul class="list-group">
                         <li class="list-group-item" style="padding:15px;">
                             <div class="row">

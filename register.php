@@ -1,5 +1,8 @@
 <?php
 require_once "models/User.php";
+require_once "models/Category.php";
+require_once "models/Cart.php";
+require_once "models/Wishlist.php";
 require_once "views/header.php";
 ?>
 <div class="breadcrumbs">

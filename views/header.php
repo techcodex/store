@@ -11,6 +11,16 @@ if(isset($_SESSION['obj_user'])) {
 } else {
     $obj_user = new User();
 }
+if(isset($_SESSION['obj_cart'])) {
+    $obj_cart = unserialize($_SESSION['obj_cart']);
+} else {
+    $obj_cart = new Cart();
+}
+if($obj_user->loggedin) {
+    $wishlist_count = Wishlist::countWishlist($obj_user->user_id);
+} else {
+    $wishlist_count = 0;
+}
 $public_pages = [
     BASE_FOLDER."login.php",
     BASE_FOLDER."register.php",
@@ -102,7 +112,10 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
     <div class="topBar inverse">
         <div class="container">
 
-
+            <ul class="list-inline pull-left hidden-sm hidden-xs">
+                <li><i class="fa fa-phone mr-5"></i>+1 (260) 702-1333</li>
+                <li><i class="fa fa-envelope mr-5"></i>info@store.com</li>
+            </ul>
             <ul class="topBarNav pull-right">
                 <?php
                     if(!$obj_user->loggedin) {
@@ -126,6 +139,13 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                 }
                 ?>
                 <li class="linkdown">
+                    <a href="<?php echo(BASE_URL); ?>users/dashboard.php">
+                        <span class="hidden-xs">
+                            Switch to Selling
+                        </span>
+                    </a>
+                </li>
+                <li class="linkdown">
                     <a href="javascript:void(0);">
                         <i class="fa fa-user mr-5"></i>
                         <span class="hidden-xs">
@@ -144,9 +164,9 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                             }
                         ?>
                         <li class="divider"></li>
-                        <li><a href="wishlist.html">Wishlist (5)</a></li>
-                        <li><a href="cart.html">My Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/wishlist.php">Wishlist (<?php echo($wishlist_count); ?>)</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/cart.php">My Cart</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/checkout.php">Checkout</a></li>
                         <?php
                         if($obj_user->loggedin) {
                             echo("<li class='divider'></li>");
@@ -159,7 +179,7 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                     <a href="javascript:void(0);">
                         <i class="fa fa-shopping-basket mr-5"></i>
                         <span class="hidden-xs">
-                            Cart<sup class="text-danger">(3)</sup>
+                            Cart<sup class="text-danger">(<?php echo($obj_cart->count); ?>)</sup>
                             <i class="fa fa-angle-down ml-5"></i>
                         </span>
                     </a>
@@ -167,56 +187,39 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                         <li>
                             <div class="cart-items">
                                 <ol class="items">
-                                    <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="<?php echo(BASE_URL); ?>img/products/men_06.jpg" alt="Sample Product ">
-                                        </a>
-                                        <div class="product-details">
-                                            <div class="close-icon">
-                                                <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                            </div>
-                                            <p class="product-name">
-                                                <a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a>
-                                            </p>
-                                            <strong>1</strong> x <span class="price text-danger">$59.99</span>
-                                        </div><!-- end product-details -->
-                                    </li><!-- end item -->
-                                    <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="<?php echo(BASE_URL); ?>img/products/shoes_01.jpg" alt="Sample Product ">
-                                        </a>
-                                        <div class="product-details">
-                                            <div class="close-icon">
-                                                <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                            </div>
-                                            <p class="product-name">
-                                                <a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a>
-                                            </p>
-                                            <strong>1</strong> x <span class="price text-danger">$39.99</span>
-                                        </div><!-- end product-details -->
-                                    </li><!-- end item -->
-                                    <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="<?php echo(BASE_URL); ?>img/products/bags_07.jpg" alt="Sample Product ">
-                                        </a>
-                                        <div class="product-details">
-                                            <div class="close-icon">
-                                                <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                            </div>
-                                            <p class="product-name">
-                                                <a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a>
-                                            </p>
-                                            <strong>1</strong> x <span class="price text-danger">$29.99</span>
-                                        </div><!-- end product-details -->
-                                    </li><!-- end item -->
+                                    <?php
+                                        $items = $obj_cart->items;
+                                        foreach($items as $item) {
+                                            echo('<li>');
+                                            echo('<a href="'.BASE_URL.'products/product.php?id='.$item->item_id.'" class="product-image">');
+                                            echo('<img src="'.BASE_URL.$item->image.'" alt="Sample Product ">');
+                                            echo('</a>');
+                                            echo('<div class="product-details">');
+                                            echo('<div class="close-icon">');
+                                            echo('<a href="'.BASE_URL.'products/process/process_cart.php?product_id='.$item->item_id.'&action=remove_item"><i class="fa fa-close"></i></a>');
+                                            echo('</div>');
+                                            echo('<p class="product-name">');
+                                            echo('<a href="'.BASE_URL.'products/product.php?id='.$item->item_id.'">'.ucfirst($item->item_name).'</a>');
+                                            echo('</p>');
+                                            echo('<strong>'.$item->quantity.'</strong> x <span class="price text-danger">$'.$item->unit_price.'</span>');
+                                            echo('</div>');
+                                            echo('</li>');
+                                        }
+                                    ?>
                                 </ol>
+                                <div class="col-md-12" style="border-top:1px solid red;margin-top:5px;">
+                                    
+                                </div>
+                                <div class="pull-right" ><b>Total:</b>
+                                    <?php echo("<span class='text-danger'> $".$obj_cart->total."</span>") ?>
+                                </div>
                             </div>
                         </li>
                         <li>
                             <div class="cart-footer">
-                                <a href="cart.html" class="pull-left"><i class="fa fa-cart-plus mr-5"></i>View Cart</a>
-                                <a href="checkout.html" class="pull-right"><i
-                                        class="fa fa-shopping-basket mr-5"></i>Checkout</a>
+                                <a href="<?php echo(BASE_URL); ?>products/cart.php" class="pull-left"><i class="fa fa-cart-plus mr-5"></i>View Cart</a>
+                                <a href="<?php echo(BASE_URL); ?>products/checkout.php" class="pull-right">
+                                    <i class="fa fa-shopping-basket mr-5"></i>Checkout</a>
                             </div>
                         </li>
                     </ul>
@@ -238,64 +241,36 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                     <form>
                         <div class="row grid-space-1">
                             <div class="col-sm-6">
-                                <input type="text" name="keyword" class="form-control input-lg" placeholder="Search">
+                                <input type="text" name="search" id="header_search" class="form-control input-lg" placeholder="Search">
                             </div><!-- end col -->
                             <div class="col-sm-3">
-                                <select class="form-control input-lg" name="category">
-                                    <option value="all">All Categories</option>
-                                    <optgroup label="Mens">
-                                        <option value="shirts">Shirts</option>
-                                        <option value="coats-jackets">Coats & Jackets</option>
-                                        <option value="underwear">Underwear</option>
-                                        <option value="sunglasses">Sunglasses</option>
-                                        <option value="socks">Socks</option>
-                                        <option value="belts">Belts</option>
-                                    </optgroup>
-                                    <optgroup label="Womens">
-                                        <option value="bresses">Bresses</option>
-                                        <option value="t-shirts">T-shirts</option>
-                                        <option value="skirts">Skirts</option>
-                                        <option value="jeans">Jeans</option>
-                                        <option value="pullover">Pullover</option>
-                                    </optgroup>
-                                    <option value="kids">Kids</option>
-                                    <option value="fashion">Fashion</option>
-                                    <optgroup label="Sportwear">
-                                        <option value="shoes">Shoes</option>
-                                        <option value="bags">Bags</option>
-                                        <option value="pants">Pants</option>
-                                        <option value="swimwear">Swimwear</option>
-                                        <option value="bicycles">Bicycles</option>
-                                    </optgroup>
-                                    <option value="bags">Bags</option>
-                                    <option value="shoes">Shoes</option>
-                                    <option value="hoseholds">HoseHolds</option>
-                                    <optgroup label="Technology">
-                                        <option value="tv">TV</option>
-                                        <option value="camera">Camera</option>
-                                        <option value="speakers">Speakers</option>
-                                        <option value="mobile">Mobile</option>
-                                        <option value="pc">PC</option>
-                                    </optgroup>
+                                <select class="form-control input-lg" id="header_category_id" name="category">
+                                    <option value="">All Categories</option>
+                                    <?php  
+                                    $categories = Category::getCategories();
+                                    foreach($categories as $category) {
+                                        echo("<option value='".$category->id."'>".ucfirst($category->name)."</option>");
+                                    }
+                                    ?>
                                 </select>
                             </div><!-- end col -->
                             <div class="col-sm-3">
-                                <input type="submit" class="btn btn-danger btn-block btn-lg" value="Search">
+                                <a href="#" id="btn_header_search" class="btn btn-danger btn-block btn-lg" >Search</a>
                             </div><!-- end col -->
                         </div><!-- end row -->
                     </form>
                 </div><!-- end col -->
                 <div class="col-sm-2 vertical-align header-items hidden-xs">
                     <div class="header-item mr-5">
-                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Wishlist">
+                        <a href="<?php echo(BASE_URL); ?>products/wishlist.php" data-toggle="tooltip" data-placement="top" title="Wishlist">
                             <i class="fa fa-heart-o"></i>
-                            <sub>32</sub>
+                            <sub><?php echo($wishlist_count); ?></sub>
                         </a>
                     </div>
                     <div class="header-item">
-                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Compare">
-                            <i class="fa fa-refresh"></i>
-                            <sub>2</sub>
+                        <a href="<?php echo(BASE_URL) ?>products/cart.php" data-toggle="tooltip" data-placement="top" title="Cart">
+                            <i class="fa fa-shopping-bag"></i>
+                            <sub><?php echo($obj_cart->count); ?></sub>
                         </a>
                     </div>
                 </div><!-- end col -->
@@ -321,12 +296,13 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                     <!-- Home -->
                     <li class="active"><a href="<?php echo(BASE_URL); ?>index.php">Home</a></li>
                     <li><a href="<?php echo(BASE_URL); ?>aboutus.php" >About Us</a></li>
-                    <li><a href="#">Products</a></li>
+                    <li><a href="<?php echo(BASE_URL); ?>products/index.php">Products</a></li>
                     <li><a href="<?php echo(BASE_URL); ?>contactus.php" >Contact Us</a></li>
                     <li class="dropdown left"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Account<i class="fa fa-angle-down ml-5"></i></a>
                         <ul class="dropdown-menu">
                             <?php
                                 if($obj_user->loggedin) {
+                                    echo("<li><a href='".BASE_URL."users/account.php'>My Account</a></li>");
                                     echo("<li><a href='".BASE_URL."process/process_logout.php'>Logout</a></li>");
                                 } else {
                                     echo("<li><a href='".BASE_URL."login.php'>Login</a></li>");
@@ -347,52 +323,13 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                             <span class="hidden-sm">Categories</span><i class="fa fa-bars ml-5"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-submenu"><a href="javascript:void(0);" class="dropdown-toggle"
-                                    data-toggle="dropdown">Mens</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">Shirts</a></li>
-                                    <li><a href="category.html">Coats & Jackets</a></li>
-                                    <li><a href="category.html">Underwear</a></li>
-                                    <li><a href="category.html">Sunglasses</a></li>
-                                    <li><a href="category.html">Socks</a></li>
-                                    <li><a href="category.html">Belts</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu"><a href="javascript:void(0);" class="dropdown-toggle"
-                                    data-toggle="dropdown">Womens</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">Bresses</a></li>
-                                    <li><a href="category.html">T-shirts</a></li>
-                                    <li><a href="category.html">Skirts</a></li>
-                                    <li><a href="category.html">Jeans</a></li>
-                                    <li><a href="category.html">Pullover</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0);">Kids</a></li>
-                            <li><a href="javascript:void(0);">Fashion</a></li>
-                            <li class="dropdown-submenu"><a href="javascript:void(0);" class="dropdown-toggle"
-                                    data-toggle="dropdown">SportWear</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">Shoes</a></li>
-                                    <li><a href="category.html">Bags</a></li>
-                                    <li><a href="category.html">Pants</a></li>
-                                    <li><a href="category.html">SwimWear</a></li>
-                                    <li><a href="category.html">Bicycles</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0);">Bags</a></li>
-                            <li><a href="javascript:void(0);">Shoes</a></li>
-                            <li><a href="javascript:void(0);">HouseHolds</a></li>
-                            <li class="dropdown-submenu"><a href="javascript:void(0);" class="dropdown-toggle"
-                                    data-toggle="dropdown">Technology</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">TV</a></li>
-                                    <li><a href="category.html">Camera</a></li>
-                                    <li><a href="category.html">Speakers</a></li>
-                                    <li><a href="category.html">Mobile</a></li>
-                                    <li><a href="category.html">PC</a></li>
-                                </ul>
-                            </li>
+                            <?php
+                                $categories  = Category::getCategories();
+                                foreach($categories as $category) {
+                                    echo('<li><a href="'.BASE_URL.'products/index.php?brand_id=0&type=all&category_id='.$category->id.'">'.ucfirst($category->name).'</a></li>');
+                                }
+                            ?>
+                            
                         </ul><!-- end ul dropdown-menu -->
                     </li><!-- end dropdown -->
                 </ul><!-- end navbar-right -->

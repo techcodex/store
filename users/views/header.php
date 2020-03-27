@@ -10,6 +10,11 @@ if(isset($_SESSION['obj_user'])) {
 } else {
     $obj_user = new User();
 }
+if(isset($_SESSION['obj_cart'])) {
+    $obj_cart = unserialize($_SESSION['obj_cart']);
+} else {
+    $obj_cart = new Cart();
+}
 $public_pages = [
     BASE_FOLDER."login.php",
     BASE_FOLDER."register.php",
@@ -128,6 +133,13 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                 }
                 ?>
                 <li class="linkdown">
+                    <a href="<?php echo(BASE_URL); ?>products/index.php">
+                        <span class="hidden-xs">
+                            Switch to Buying
+                        </span>
+                    </a>
+                </li>
+                <li class="linkdown">
                     <a href="javascript:void(0);">
                         <i class="fa fa-user mr-5"></i>
                         <span class="hidden-xs">
@@ -161,7 +173,7 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                     <a href="javascript:void(0);">
                         <i class="fa fa-shopping-basket mr-5"></i>
                         <span class="hidden-xs">
-                            Cart<sup class="text-danger">(3)</sup>
+                            Cart<sup class="text-danger">(<?php echo($obj_cart->count); ?>)</sup>
                             <i class="fa fa-angle-down ml-5"></i>
                         </span>
                     </a>
@@ -169,48 +181,25 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                         <li>
                             <div class="cart-items">
                                 <ol class="items">
-                                    <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="<?php echo(BASE_URL); ?>img/products/men_06.jpg" alt="Sample Product ">
-                                        </a>
-                                        <div class="product-details">
-                                            <div class="close-icon">
-                                                <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                            </div>
-                                            <p class="product-name">
-                                                <a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a>
-                                            </p>
-                                            <strong>1</strong> x <span class="price text-danger">$59.99</span>
-                                        </div><!-- end product-details -->
-                                    </li><!-- end item -->
-                                    <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="<?php echo(BASE_URL); ?>img/products/shoes_01.jpg" alt="Sample Product ">
-                                        </a>
-                                        <div class="product-details">
-                                            <div class="close-icon">
-                                                <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                            </div>
-                                            <p class="product-name">
-                                                <a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a>
-                                            </p>
-                                            <strong>1</strong> x <span class="price text-danger">$39.99</span>
-                                        </div><!-- end product-details -->
-                                    </li><!-- end item -->
-                                    <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="<?php echo(BASE_URL); ?>img/products/bags_07.jpg" alt="Sample Product ">
-                                        </a>
-                                        <div class="product-details">
-                                            <div class="close-icon">
-                                                <a href="javascript:void(0);"><i class="fa fa-close"></i></a>
-                                            </div>
-                                            <p class="product-name">
-                                                <a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a>
-                                            </p>
-                                            <strong>1</strong> x <span class="price text-danger">$29.99</span>
-                                        </div><!-- end product-details -->
-                                    </li><!-- end item -->
+                                <?php
+                                    $items = $obj_cart->items;
+                                    foreach($items as $item) {
+                                        echo('<li>');
+                                        echo('<a href="'.BASE_URL.'products/product.php?id='.$item->item_id.'" class="product-image">');
+                                        echo('<img src="'.BASE_URL.$item->image.'" alt="Sample Product ">');
+                                        echo('</a>');
+                                        echo('<div class="product-details">');
+                                        echo('<div class="close-icon">');
+                                        echo('<a href="'.BASE_URL.'products/process/process_cart.php?product_id='.$item->item_id.'&action=remove_item"><i class="fa fa-close"></i></a>');
+                                        echo('</div>');
+                                        echo('<p class="product-name">');
+                                        echo('<a href="'.BASE_URL.'products/product.php?id='.$item->item_id.'">'.ucfirst($item->item_name).'</a>');
+                                        echo('</p>');
+                                        echo('<strong>'.$item->quantity.'</strong> x <span class="price text-danger">$'.$item->unit_price.'</span>');
+                                        echo('</div>');
+                                        echo('</li>');
+                                    }
+                                    ?>
                                 </ol>
                             </div>
                         </li>

@@ -376,6 +376,14 @@ class User{
             throw new Exception("Db update error - $obj_db->error");
         }
     }
+    public function updateOrderProfile() {
+        $obj_db = self::obj_db();
+        $query = "update user_profile "
+                ."(`first_name`,`last_name`,`contact_no`,`street_address`) "
+                ." values "
+                ."('$this->first_name','$this->last_name','$this->contact_no','$this->street_address') "
+                ." where user_id = $this->user_id ";
+    }
 }
 
 ?>

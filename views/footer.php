@@ -119,7 +119,7 @@
     <!-- datatable  -->
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.bootstrap.min.js"></script>>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.bootstrap.min.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded",(e)=>{
         toastr.options.escapeHtml = true;
@@ -140,8 +140,24 @@
                 unset($_SESSION['info']);
             }
         ?>
+        $("#header_category_id").change(function(e) {
+            var id = $("#header_category_id").val();
+            if(id == "") {
+                return;
+            }
+            window.location.replace("<?php echo(BASE_URL); ?>products/index.php?brand_id=0&type=all&category_id="+id);
+        });
+        $("#btn_header_search").click((e)=>{
+            var search = $("#header_search").val();
+            if(search == "") {
+                toastr.error("Please Enter Product Name You Want to Search");
+                return;
+            }
+            window.location.replace("<?php echo(BASE_URL); ?>products/index.php?brand_id=0&category_id=0&type="+search);
+        }); 
     });
     var loader = "<img src='<?php echo(BASE_URL); ?>img/loader.gif' width='15'>";
+    
     </script>
 </body>
 
