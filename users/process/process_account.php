@@ -4,6 +4,7 @@
 // echo("</pre>");
 // die;
 require_once "../../init.php";
+require_once "../../models/User.php";
 if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_SESSION['obj_user'])) {
     $obj_user = unserialize($_SESSION['obj_user']);
     $errors = [];

@@ -150,14 +150,12 @@ if(in_array($current,$restricted_pages) && !$obj_admin->loggedin) {
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="user-name"><?php echo(ucfirst($obj_admin->user_name)); ?><i class="fa fa-angle-down"></i></span>
-                                        <img class="img-circle avatar" src="<?php echo(BASE_URL); ?>assets/images/avatar1.png" width="40" height="40" alt="">
+                                        <?php echo("<img class='img-circle avatar' src='".WEB_BASE_URL."img/admin/".$obj_admin->image."' width='40' height='40' alt=''>");?>
                                     </a>
                                     <ul class="dropdown-menu dropdown-list" role="menu">
-                                        <li role="presentation"><a href="profile.html"><i class="icon-user"></i>Profile</a></li>
-                                        <li role="presentation"><a href="calendar.html"><i class="icon-calendar"></i>Calendar</a></li>
-                                        <li role="presentation"><a href="inbox.html"><i class="icon-envelope-open"></i>Inbox<span class="badge badge-success pull-right">4</span></a></li>
+                                        <li role="presentation"><a href="<?php echo(BASE_URL); ?>admins/profile.php"><i class="icon-user"></i>Profile</a></li>
                                         <li role="presentation" class="divider"></li>
-                                        <li role="presentation"><a href="lock-screen.html"><i class="icon-lock"></i>Lock screen</a></li>
+                                        <li role="presentation"><a href="<?php echo(BASE_URL); ?>changePassword.php"><i class="icon-lock"></i>Change Password</a></li>
                                         <li role="presentation"><a href="<?php echo(BASE_URL); ?>process/process_logout.php"><i class="icon-key m-r-xs"></i>Logout</a></li>
                                     </ul>
                                 </li>

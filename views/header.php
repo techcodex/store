@@ -2,6 +2,10 @@
 session_start();
 define("BASE_FOLDER","/");
 define("BASE_URL","http://".$_SERVER['HTTP_HOST'].BASE_FOLDER);
+
+define("WEB_BASE_FOLDER","/");
+define("WEB_BASE_URL","http://".$_SERVER['HTTP_HOST'].WEB_BASE_FOLDER);
+
 define('ITEM_PER_PAGE',3);
 if(isset($_COOKIE['obj_user'])) {
     $_SESSION['obj_user'] = $_COOKIE['obj_user'];

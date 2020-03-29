@@ -49,11 +49,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     } catch(Exception $ex) {
         $errors['category_id'] = $ex->getMessage();
     }
+    if ($_FILES['image']['tmp_name'] != '') {
     try{
         $obj_product->image = $_FILES['image'];
     } catch(Exception $ex) {
         $errors['image'] = $ex->getMessage();
     }
+}
+
     if(count($errors) == 0) {
         try{
             $obj_product->update();
