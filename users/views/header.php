@@ -154,13 +154,13 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                                 echo("<li><a href='".BASE_URL."register.php'>Create Account</a></li>");
                             } 
                             else {
-                                echo("<li><a href=''>Account Setting</a></li>");
+                                echo("<li><a href='".BASE_URL."users/account.php'>Account Setting</a></li>");
                             }
                         ?>
                         <li class="divider"></li>
-                        <li><a href="wishlist.html">Wishlist (5)</a></li>
-                        <li><a href="cart.html">My Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/wishlist.php">Wishlist (<?php echo(Wishlist::countWishlist($obj_user->user_id)); ?>)</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/cart.php">My Cart</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/checkout.php">Checkout</a></li>
                         <?php
                         if($obj_user->loggedin) {
                             echo("<li class='divider'></li>");

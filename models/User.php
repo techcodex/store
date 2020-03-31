@@ -17,7 +17,7 @@ class User{
     private $country_id;
     private $city_id;
     private $date_of_birth;
-
+    private $rating;
 
     public function __set($name, $value)
     {
@@ -46,6 +46,9 @@ class User{
     private function getLoggedin() {
         return $this->loggedin;
     }
+    private function getRating() {
+        return $this->rating;
+    }
     private function setFirst_name($first_name) {
         $reg = "/^[a-z]+$/i";
         if(!preg_match($reg,$first_name)) {
@@ -56,6 +59,7 @@ class User{
     private function getFirst_name() {
         return $this->first_name;
     }
+    
     private function setLast_name($last_name) {
         $reg = "/^[a-z]+$/i";
         if(!preg_match($reg,$last_name)) {
@@ -150,7 +154,8 @@ class User{
         return $data->fetch_object()->name;
     }
     private function setContact_no($contact_no) {
-        $reg = "/^\d{1,4}\-\d{3}\-\d{7}$/";
+        //+1-260-444-6993
+        $reg = "/^\+\d{1}\-\d{3}\-\d{3}-\d{4}$/";
         if(!preg_match($reg,$contact_no)) {
             throw new Exception("*Invalid / Missing Contact Number");
         }
@@ -257,14 +262,14 @@ class User{
     }
     public function profile() {
         $obj_db = self::obj_db();
-        $query = "select * from user_profile "
-                ." where user_id = $this->user_id ";
+        $query = "select * from users u "
+                ." JOIN user_profile up on up.user_id = u.id "
+                ." where u.id = $this->user_id ";
         $data = $obj_db->query($query);
         if($obj_db->errno) {
             throw new Exception("Db Select Error - $obj_db->error");
         }
         $user = $data->fetch_object();
-
         $this->first_name = $user->first_name;
         $this->last_name = $user->last_name;
         $this->middle_name = $user->middle_name;
@@ -274,6 +279,7 @@ class User{
         $this->country_id = $user->country_id;
         $this->state_id = $user->state_id;
         $this->city_id = $user->city_id;
+        $this->rating = $user->rating;
         $this->date_of_birth = $user->date_of_birth;
     }
     public function logout() {
@@ -301,7 +307,7 @@ class User{
     }
     public static function show_all_users() {
         $obj_db  = self::obj_db();
-        $query = "select u.id as user_id,u.user_name,u.email,u.status,up.first_name,up.last_name "
+        $query = "select u.id as user_id,u.user_name,u.email,u.rating,u.status,up.first_name,up.last_name,up.profile_image "
                 ." from users u "
                 ."JOIN user_profile up on u.id = up.user_id "
                 ."ORDER BY user_name ASC ";
@@ -383,6 +389,28 @@ class User{
                 ." values "
                 ."('$this->first_name','$this->last_name','$this->contact_no','$this->street_address') "
                 ." where user_id = $this->user_id ";
+    }
+    public static function makeRating($user_id,$rating) {
+        // die($rating);
+        $obj_db = self::obj_db();
+        $query = " select * from users "
+                ." where id = $user_id ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
+        $user = $result->fetch_object();
+        $user_rating = $user->rating;
+        $user_rating += $rating;
+        $user_rating = round($user_rating / 2,1);
+        $query_update = " update users "
+                        ." set rating = $user_rating "
+                        ." where id = $user_id ";
+        // die($query_update);
+        $obj_db->query($query_update);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
     }
 }
 

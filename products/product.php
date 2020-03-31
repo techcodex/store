@@ -1,8 +1,12 @@
 <?php
 require_once "../models/User.php";
+require_once "../models/Cart.php";
+require_once "../models/Category.php";
+require_once "../models/Wishlist.php";
 require_once "../models/Product.php";
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
+    Product::viewIncrement($id);
     $product = Product::getProduct($id);
 }
 require_once "../views/header.php";
@@ -45,7 +49,7 @@ require_once "../views/header.php";
                                     
                                     <ul class="list list-inline">
                                         <li><h5 class="text-primary">$ <?php echo($product->price); ?></h5></li>
-                                        <li><a href="javascript:void(0);">(4 views)</a></li>
+                                        <li><a href="javascript:void(0);">(<?php echo($product->view); ?> views)</a></li>
                                     </ul>
                             </div><!-- end col -->
                         </div><!-- end row -->
@@ -75,7 +79,7 @@ require_once "../views/header.php";
                         <div class="information">
                         <div class="row">
                                 <p class="col-md-6 border"><b>Rating:</b></p>
-                                <p class="col-md-6 text-center"> 5.0</p>
+                                <p class="col-md-6 text-center"><?php echo($product->rating); ?></p>
                             </div>
                             <div class="row">
                                 <p class="col-md-6 border"><b>User Name:</b></p>
@@ -102,7 +106,7 @@ require_once "../views/header.php";
                                 <p class="col-md-6 text-center"> <?php echo($product->city_name == "" ? "N/A" : $product->city_name); ?></p>
                             </div>
                             <div class="row">
-                                <input type="button" class="btn btn-danger btn-md round col-md-offset-4" value="Contact">
+                                <a href="<?php echo(BASE_URL.'products/index.php?user_id='.$product->user_id); ?>" class="btn btn-danger btn-md round col-md-offset-4">Seller Products</a>
                             </div>
                             <br>
                         </div>

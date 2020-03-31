@@ -1,8 +1,8 @@
 <?php
-require_once "../models/Cart.php";
 require_once "../models/User.php";
 require_once "../models/Product.php";
 require_once "../models/Category.php";
+require_once "../models/Cart.php";
 require_once "../models/Brand.php";
 require_once "../models/Wishlist.php";
 require_once "../views/header.php";
@@ -11,6 +11,7 @@ $limit = isset($_GET['limit']) ? $_GET['limit'] : ITEM_PER_PAGE;
 $type = isset($_GET['type']) ? $_GET['type'] : "all";
 $brand_id = isset($_GET['brand_id']) ? $_GET['brand_id'] : 0;
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : 0;
+$user_id = isset($_GET['user_id']) ? $_GET['user_id'] : 0;
 ?>
 
 <!-- start section -->
@@ -123,7 +124,7 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : 0;
 
                 <div class="row column-3">
                     <?php
-                        $products = Product::showAllProducts($limit,$offset,$brand_id,$category_id,0,$type);
+                        $products = Product::showAllProducts($limit,$offset,$brand_id,$category_id,$user_id,$type);
                         foreach($products as $product) {
                             echo('<div class="col-sm-6 col-md-4">');
                             echo('<div class="thumbnail store style1">');

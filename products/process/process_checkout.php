@@ -65,15 +65,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors['contact_no'] = $ex->getMessage();
     }
     if(count($errors) == 0) {
-        try{
-            $obj_user->updateOrderProfile();
-            $obj_order->create();
-            $response['success'] = true;
-            $response['msg'] = "Order Place Sucessfully";
-            unset($_SESSION['obj_cart']);
-        } catch(Exception $ex) {
-            $response['error'] = true;
-            $response['msg'] = $ex->getMessage();
+        $items = $obj_cart->items;
+        $i = 0;
+        foreach($items as $item) {
+            if($item->user_id == $obj_user->user_id) {
+                $i++;
+                $obj_cart->remove_cart($item);
+            }
+        }
+        if($i > 0) {
+            $_SESSION['obj_cart'] = serialize($obj_cart);
+            $response['error_item'] = "User Cannot Buy his Own Products ";
+        } else {
+            try{
+                $obj_user->updateOrderProfile();
+    
+                $obj_order->create();
+                $response['success'] = true;
+                $response['msg'] = "Order Place Sucessfully";
+                unset($_SESSION['obj_cart']);
+            } catch(Exception $ex) {
+                $response['error'] = true;
+                $response['msg'] = $ex->getMessage();
+            }
         }
     } else {
         $response['errors'] = $errors;

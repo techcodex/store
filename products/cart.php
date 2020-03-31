@@ -16,19 +16,19 @@ require_once "../views/header.php";
 
                     <ul class="list list-unstyled">
                         <li>
-                            <a href="my-account.html">My Account</a>
+                            <a href="<?php echo(BASE_URL); ?>users/account.php">My Account</a>
                         </li>
                         <li class="active">
-                            <a href="cart.html">My Cart <span class="text-danger">(<?php echo ($obj_cart->count) ?>)</span></a>
+                            <a href="<?php echo(BASE_URL); ?>products/cart.php">My Cart <span class="text-danger">(<?php echo ($obj_cart->count) ?>)</span></a>
                         </li>
                         <li>
-                            <a href="order-list.html">My Order</a>
+                            <a href="<?php echo(BASE_URL); ?>users/orders/orders.php">My Order</a>
                         </li>
                         <li>
-                            <a href="wishlist.html">Wishlist <span class="text-danger">(5)</span></a>
+                            <a href="<?php echo(BASE_URL); ?>products/wishlist.php">Wishlist <span class="text-danger">(5)</span></a>
                         </li>
                         <li>
-                            <a href="user-information.html"> Account Settings</a>
+                            <a href="<?php echo(BASE_URL); ?>users/edit.php"> Account Settings</a>
                         </li>
                     </ul>
                 </div><!-- end widget -->

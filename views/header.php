@@ -1,8 +1,10 @@
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 define("BASE_FOLDER","/");
 define("BASE_URL","http://".$_SERVER['HTTP_HOST'].BASE_FOLDER);
-define('ITEM_PER_PAGE',3);
+define('ITEM_PER_PAGE',6);
 if(isset($_COOKIE['obj_user'])) {
     $_SESSION['obj_user'] = $_COOKIE['obj_user'];
 }
@@ -27,6 +29,7 @@ $public_pages = [
 ];
 $restricted_pages = [
     BASE_FOLDER."users/account.php",
+    BASE_FOLDER."users/edit.php",
 ];
 $current = $_SERVER['PHP_SELF'];
 
@@ -103,6 +106,47 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
         .hover:hover{
             color:#e55e5a;
         }
+        .stars input {
+            position: absolute;
+            left: -999999px;
+        }
+
+        .stars a {
+            display: inline-block;
+            padding-right:4px;
+            text-decoration: none;
+            margin:0;
+        }
+
+        .stars a:after {
+            position: relative;
+            font-size: 18px;
+            font-family: 'FontAwesome', serif;
+            display: block;
+            content: "\f005";
+            color: #9e9e9e;
+        }
+
+
+        .number {
+        font-size: 0; /* trick to remove inline-element's margin */
+        }
+
+        .stars a:hover ~ a:after{
+        color: #9e9e9e !important;
+        }
+        span.active a.active ~ a:after{
+        color: #9e9e9e;
+        }
+
+        span:hover a:after{
+        color:goldenrod !important;
+        }
+
+        span.active a:after,
+        .stars a.active:after{
+            color:goldenrod;
+        }
     </style>
 </head>
 
@@ -135,16 +179,21 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                         </span>
                     </a>
                 </li>
+
+                <?php
+                } else {
+                    ?>
+                    <li class="linkdown">
+                        <a href="<?php echo(BASE_URL); ?>users/dashboard.php">
+                            <span class="hidden-xs">
+                                Switch to Selling
+                            </span>
+                        </a>
+                    </li>
                 <?php
                 }
                 ?>
-                <li class="linkdown">
-                    <a href="<?php echo(BASE_URL); ?>users/dashboard.php">
-                        <span class="hidden-xs">
-                            Switch to Selling
-                        </span>
-                    </a>
-                </li>
+                
                 <li class="linkdown">
                     <a href="javascript:void(0);">
                         <i class="fa fa-user mr-5"></i>
@@ -312,7 +361,7 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
 
                         </ul><!-- end ul dropdown-menu -->
                     </li>
-                    <li class="dropdown "><a href="#" data-toggle="dropdown" class="dropdown-toggle">Cart</a></li>
+                    <li class="dropdown "><a href="<?php echo(BASE_URL); ?>products/cart.php" class="dropdown-toggle">Cart</a></li>
 
 
                     <!-- Features -->

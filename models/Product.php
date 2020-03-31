@@ -226,8 +226,8 @@ class Product{
     }
     public static function getProduct($id) {
         $obj_db =self::obj_db();
-        $query = "select p.id as id,p.name,p.description,p.features,p.image,p.price,p.quantity,"
-                ." u.user_name, up.first_name,up.last_name,up.gender,up.profile_image, "
+        $query = "select p.id as id,p.name,p.description,p.features,p.image,p.price,p.quantity,p.view,p.user_id,"
+                ." u.user_name, up.first_name,up.last_name,up.gender,up.profile_image,u.rating, "
                 ."c.name as country_name,s.name as state_name,ci.name as city_name "
                 ." from products p "
                 ." JOIN users u on p.user_id = u.id "
@@ -264,7 +264,7 @@ class Product{
             throw new Exception("DB update error - $obj_db->error");
         }
     }
-    public static function showAllProducts($limit=0,$offset=-1,$brand_id,$category_id,$user_id,$type="all") {
+    public static function showAllProducts($limit=0,$offset=-1,$brand_id,$category_id,$user_id=0,$type="all") {
         $obj_db = self::obj_db();
         $query = "select * from products p where status = 1 ";
 
@@ -277,26 +277,9 @@ class Product{
         if($type != "all") {
             $query .= " AND name LIKE '%$type%' ";
         }
-
-        // if($type != "all" && $category_id == 0 && $brand_id == 0) {
-        //     $query .= " WHERE p.name LIKE '%$type%' ";
-        // }
-        // if($brand_id != 0 && $category_id == 0 && $type == "all") {
-        //     $query .= " WHERE brand_id = $brand_id ";
-        // }
-        // if($category_id !=0 && $brand_id != 0 && $type == "all") {
-        //     $query .=" WHERE category_id = $category_id AND brand_id = $brand_id ";
-        // }
-        // if($category_id != "0" && $brand_id != "0" && $type != "all") {
-        //     $query .= " WHERE category_id = $category_id AND brand_id = $brand_id AND name LIKE '%$type%' ";
-        // }
-        // if($category_id != "0" && $brand_id == "0" && $type != "all") {
-        //     $query .= " WHERE category_id = $category_id AND name LIKE '%$type%' ";
-        // }
-        // if($category_id == "0" && $brand_id != "0" && $type != "all") {
-        //     $query .= " WHERE brand_id = $brand_id AND name LIKE '%$type%' ";
-        // }
-        
+        if($user_id != 0) {
+            $query .= " AND user_id = $user_id ";
+        }
         if($limit > 0 && $offset > -1) {
             $query .= " limit $limit offset $offset ";
         }
@@ -338,5 +321,28 @@ class Product{
         }
         return $p_num;
     }
+    public static function viewIncrement($product_id) {
+        $obj_db = self::obj_db();
+        $query = " update products set "
+                ." view = view + 1 "
+                ." where id = $product_id ";
+        $obj_db->query($query);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
+    }
+    public static function countSellerProducts($user_id) {
+        $obj_db = self::obj_db();
+        $query = "select count(*) as total from products "
+                ." where user_id = $user_id ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
+        if($result->num_rows == 0) {
+            return 0;
+        }
+        return $result->fetch_object()->total;
+    } 
 }
 ?>

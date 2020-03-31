@@ -28,8 +28,8 @@
                         </li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-bar-chart"></span><p>Orders</p><span class="arrow"></span></a>
                             <ul class="sub-menu">
-                                <li><a href="inbox.html">New Orders</a></li>
-                                <li><a href="message-view.html">Delivered Orders</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>orders/new_orders.php">New Orders</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>orders/delivered.php">Delivered Orders</a></li>
                             </ul>
                         </li>
                         <li class=""><a href="<?php echo(BASE_URL); ?>messages/index.php" class="waves-effect waves-button"><span class="menu-icon icon-envelope"></span><p>Messages</p></a>

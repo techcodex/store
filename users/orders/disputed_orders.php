@@ -2,7 +2,6 @@
 require_once "../../models/User.php";
 require_once "../../models/Cart.php";
 require_once "../../models/Order.php";
-require_once "../../models/Wishlist.php";
 require_once "../views/header.php";
 require_once "../views/sidebar.php";
 ?>
@@ -13,17 +12,15 @@ require_once "../views/sidebar.php";
                 <th>Sr.No</th>
                 <th>Order ID#</th>
                 <th>DATE</th>
-                <th>Shipment</th>
-                <th>Clearence</th>
                 <th>Notes</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
         <?php
-            $orders = Order::getSellerOrders($obj_user->user_id);
+            $orders = Order::UserdisputedOrders($obj_user->user_id);
             if(count($orders) == 0) {
-                echo("<tr><td colspan='7' class='text-center'>No Order Found</td></tr>");
+                echo("<tr><td colspan='6' class='text-center'>No Order Found</td></tr>");
             } else {
                 $i = 0;
                 foreach($orders as $order) {
@@ -32,22 +29,15 @@ require_once "../views/sidebar.php";
                     echo("<td>".$i."</td>");
                     echo("<td>".$order->order_id."</td>");
                     echo("<td>".$order->date."</td>");
-                    if($order->status == 0) {
-                        echo("<td><a href='#' data-id='".$order->order_id."' class='delivered'><i class='badge' style='background-color:#e55e5a;'>Pending</i></a></td>");
-                    } else {
-                        echo("<td><a href='#'><i class='badge badge-primary' style='background-color:#007bff'>Delivered</i></a></td>");
-                    }
-                    if($order->confirm == 0) {
-                        echo("<td><i class='badge' style='background-color:#e55e5a;'>Pending</i></td>");
-                    } else {
-                        echo("<td><i class='badge badge-primary' style='background-color:#007bff'>Clear</i></td>");
-                    }
                     if($order->notes == "") {
                         echo("<td>N/A</td>");
                     } else {
                         echo("<td>".$order->notes."</td>");
                     }
-                    echo("<td><a href='#' class='view' data-id='".$order->order_id."'  style='color:green;' title='order Products'><i class='fa fa-eye'></i></a></td>");
+                    echo("<td>");
+                    echo("<a href='#' class='view' data-id='".$order->order_id."'  style='color:green;' title='order Products'><i class='fa fa-eye'></i></a>&nbsp;");
+                    echo("<a href='".BASE_URL."users/orders/process/process_close_dispute.php?id=".$order->order_id."' title='Click to clear Dispute' style='color:orange'><i class='fa fa-check-circle'></i></a>");
+                    echo("</td>");
                     echo("</tr>");
                     
                 }

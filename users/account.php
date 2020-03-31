@@ -12,6 +12,27 @@ $obj_user->profile();
             <div class="panel col-md-5 col-md-offset-3" style="border:1px solid lightgrey;">
                 <div class="panel-heading text-center" style="border-bottom:1px solid lightgrey;">
                     <img src="<?php echo (BASE_URL); ?>img/team/team_01.jpg" alt="img" class="img-circle" width="100">
+                    <div class="rating">
+                        <?php
+                            $rating = ceil($obj_user->rating);
+                            for($i=1;$i<=5;$i++) {
+                                if($rating < 3) {
+                                    if($i <= $rating) {
+                                        echo("<span class='fa fa-star text-danger'></span> &nbsp");
+                                    } else {
+                                        echo("<span class='fa fa-star'></span> &nbsp");
+                                    }
+                                } else {
+                                    if($i <= $rating) {
+                                        echo("<span class='fa fa-star text-success'></span> &nbsp");
+                                    } else {
+                                        echo("<span class='fa fa-star'></span> &nbsp");
+                                    }
+                                }
+                                
+                            }
+                        ?>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -96,9 +117,9 @@ $obj_user->profile();
                     </div>
                 </div>
                 <div class="panel-footer" style="background-color: white;">
-                    <a href="" class="btn btn-sm semi-circle btn-primary ">Edit Profile</a>
-                    <a href="" class="btn btn-sm btn-rounded semi-circle btn-danger ">Change Password</a>
-                    <a href="" class="btn btn-sm btn-rounded btn-success semi-circle ">Change Profile Image</a>
+                    <a href="<?php echo(BASE_URL); ?>users/edit.php" class="btn btn-sm semi-circle btn-primary ">Edit Profile</a>
+                    <a href="<?php echo(BASE_URL); ?>users/change_password.php" class="btn btn-sm btn-rounded semi-circle btn-danger ">Change Password</a>
+                    <a href="<?php echo(BASE_URL); ?>users/change_profile.php" class="btn btn-sm btn-rounded btn-success semi-circle ">Change Profile Image</a>
                 </div>
             </div>
         </div>

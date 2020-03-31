@@ -1,6 +1,9 @@
 <?php
+require_once "../models/Wishlist.php";
 require_once "../models/User.php";
 require_once "../models/Cart.php";
+require_once "../models/Product.php";
+require_once "../models/Order.php";
 require_once "views/header.php";
 require_once "views/sidebar.php";
 ?>
@@ -16,7 +19,7 @@ require_once "views/sidebar.php";
                 <div class="col-md-8 col-sm-8 col-xs-8" style="color:white; font-size: 20px;">
                     <p class="text-center">New Orders</p>
                     <p class="text-center">
-                        0                                    
+                        <?php echo(Order::countSellerNewOrders($obj_user->user_id)); ?>                             
                     </p>
                 </div>
             </div>
@@ -33,7 +36,7 @@ require_once "views/sidebar.php";
                 <div class="col-md-8 col-sm-8 col-xs-8" style="color:white; font-size: 20px;">
                     <p class="text-center">Deleivered</p>
                     <p class="text-center">
-                        0                                    
+                    <?php echo(Order::countSellerDeliveredOrders($obj_user->user_id)); ?>                                                
                     </p>
                 </div>
             </div>
@@ -50,7 +53,7 @@ require_once "views/sidebar.php";
                 <div class="col-md-8 col-sm-8 col-xs-8" style="color:white; font-size: 20px;">
                     <p class="text-center">Products</p>
                     <p class="text-center">
-                        0                                    
+                        <?php echo(Product::countSellerProducts($obj_user->user_id));  ?>                                
                     </p>
                 </div>
             </div>

@@ -18,11 +18,13 @@ class Item {
     //put your code here
     private $item_id;
     private $quantity;
-    
-    public function __construct($item_id,$quantity = 1) {
+    private $user_id;
+
+    public function __construct($item_id,$quantity = 1,$user_id) {
 //        die("sss".$this->item_id);
         $this->item_id = $item_id;
         $this->quantity = $quantity;
+        $this->user_id = $user_id;
     }
     
     public function __set($name, $value) {
@@ -49,6 +51,15 @@ class Item {
     }
     private function getItem_id() {
         return $this->item_id;
+    }
+    private function setUser_id($user_id) {
+        if(!is_numeric($user_id) || $user_id<=0) {
+            throw new Exception("Missing User");
+        }
+        $this->user_id = $user_id;
+    }
+    private function getUser_id() {
+        return $this->user_id;
     }
     private function setQuantity($quantity) {
         if(!is_numeric($quantity) || $quantity<=0) {

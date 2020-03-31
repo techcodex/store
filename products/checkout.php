@@ -463,7 +463,13 @@ document.addEventListener("DOMContentLoaded",(e)=>{
                             output += "<li class='text-danger'>"+errors['error']+"</li>";
                         }
                         $("#output").innerHTML(output);
-                    } else {
+                    } else if(result.hasOwnProperty('error_item')) {
+                        toastr.error(result.error_item);
+                        setTimeout(()=>{
+                            window.location.replace("<?php echo(BASE_URL); ?>products/checkout.php");
+                        },2000);
+                    } 
+                    else {
                         toastr.error("Contact Admin"+jqXHR.status);
                     }
                 }

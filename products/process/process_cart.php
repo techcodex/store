@@ -5,6 +5,7 @@
 // die;
 require_once '../../models/Cart.php';
 require_once '../../models/Item.php';
+require_once "../../models/Product.php";
 require_once "../../init.php";
 if(isset($_SESSION['obj_cart'])) {
     $obj_cart = unserialize($_SESSION['obj_cart']);
@@ -16,7 +17,8 @@ if(isset($_POST['action'])) {
     switch($_POST['action']) {
         case "add_to_cart":
             $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : 0;
-            $item = new Item($product_id);
+            $product = Product::getProduct($product_id);
+            $item = new Item($product_id,1,$product->user_id);
             try{
                 $obj_cart->add_to_cart($item);
             } catch(Exception $ex) {
@@ -39,7 +41,8 @@ if(isset($_GET['action'])) {
             break;
         case "remove_item":
             $product_id = isset($_GET['product_id']) ? $_GET['product_id'] : 0;
-            $item = new Item($product_id);
+            $product = Product::getProduct($product_id);
+            $item = new Item($product_id,1,$product->user_id);
             $obj_cart->remove_cart($item);
             break;
     }

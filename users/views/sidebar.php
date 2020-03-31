@@ -50,7 +50,7 @@
                                     <span class="fa fa-cart-plus" style="color:#e55e5a"></span>
                                 </div>
                                 <div class="col-md-10">
-                                    <a href="" class="hover">New Orders</a>
+                                    <a href="<?php echo(BASE_URL); ?>users/orders/sellerorders.php" class="hover">New Orders</a>
                                 </div>
                             </div>
                         </li>
@@ -60,7 +60,19 @@
                                     <span class="fa fa-bus" style="color:#e55e5a"></span>
                                 </div>
                                 <div class="col-md-10">
-                                    <a href="" class="hover">Delivered Orders</a>
+                                    <a href="<?php echo(BASE_URL); ?>users/orders/deliveredorders.php" class="hover">Delivered Orders</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="padding:15px;">
+                            <div class="row">
+                                <div class="col-md-2 border">
+                                    <span class="fa fa-info-circle" style="color:#e55e5a"></span>
+                                </div>
+                                <div class="col-md-10">
+                                    <a href="<?php echo(BASE_URL); ?>users/orders/disputed_orders.php" class="hover">Disputed Orders <i class="badge badge-default pull-right">
+                                        <?php echo(Order::countUserdisputedOrders($obj_user->user_id)); ?>
+                                    </i></a>
                                 </div>
                             </div>
                         </li>

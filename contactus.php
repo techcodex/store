@@ -1,5 +1,7 @@
 <?php
 require_once "models/User.php";
+require_once "models/Cart.php";
+require_once "models/Category.php";
 require_once "views/header.php";
 
 if(isset($_SESSION['errors'])) {

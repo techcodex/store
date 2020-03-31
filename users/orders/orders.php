@@ -59,6 +59,7 @@ require_once "../../views/header.php";
                             <th>Order id</th>
                             <th>Date</th>
                             <th>Status</th>
+                            <th>Clearence</th>
                             <th>Notes</th>
                             <th>Actions</th>
                         </tr>
@@ -79,13 +80,30 @@ require_once "../../views/header.php";
                             } else {
                                 echo("<td><i class='badge badge-primary' style='background-color:#007bff'>Delivered</i></td>");
                             }
+                            if($order->confirm == 0) {
+                                echo("<td><a href='".BASE_URL."users/orders/complete_order.php?id=".$order->id."' class='btn btn-sm btn-primary semi-circle pending' data-id='".$order->id."' title='payment pending click to clear'>Complete Order</a></td>");
+                            } else {
+                                echo("<td><a href='#' class='btn btn-sm btn-success semi-circle' title='payment paid'>Paid</a></td>");
+                            }
                             if($order->notes == "") {
                                 echo("<td>N/A</td>");
                             } else {
                                 echo("<td>".$order->notes."</td>");
                             }
-                            echo("<td><a href='#' style='color:green;' data-id='".$order->id."' class='view' title='order Items'><i class='fa fa-eye'></i></a></td>");
-                            echo("</tr>");
+                            if($order->confirm == 1) {
+                                echo("<td><a href='#' style='color:green;' data-id='".$order->id."' class='view' title='order Items'><i class='fa fa-eye'></i></a>".
+                                "&nbsp;<a href='".BASE_URL."users/orders/order_feedback.php?id=".$order->id."' title='Check Feedback' style='color:blue;'><i class='fa fa-check-square'></i></a>"
+                                ."</td>");
+                                echo("</tr>");
+                            } else {
+                                echo("<td><a href='#' style='color:green;' data-id='".$order->id."' class='view' title='order Items'><i class='fa fa-eye'></i></a>");
+                                if($order->dispute == 0 || $order->dispute == 2 && $order->confirm == 0) {
+                                    echo("&nbsp;<a href='".BASE_URL."users/orders/dispute.php?id=".$order->id."' title='Open Disputed' style='color:red;'><i class='fa fa-info-circle'></i></a>");
+                                }
+                                echo("</td>");
+                                echo("</tr>");
+                            }
+                            
                             
                         }
                     ?>
@@ -128,6 +146,7 @@ require_once "../../views/header.php";
 
   </div>
 </div>
+<!-- Rating Modal -->
 <?php
 require_once "../../views/footer.php"
 ?>
@@ -136,10 +155,8 @@ require_once "../../views/footer.php"
 $(document).ready(function(e) {
     $(".view").click(function(e){
         var id = $(this).data("id");
-        var user_id = "<?php echo($obj_user->user_id); ?>";
         var data = {
             'id':id,
-            'user_id':user_id,
         };
         $.ajax({
             url:"<?php echo(BASE_URL); ?>users/orders/process/process_getOrderItems.php",
@@ -169,5 +186,8 @@ $(document).ready(function(e) {
             }
         });
     });
+    
+    
 });
+
 </script>
