@@ -1,17 +1,23 @@
 <div class="page-sidebar sidebar">
                 <div class="page-sidebar-inner slimscroll">
                     <ul class="menu accordion-menu">
-                        <li class="active"><a href="index.html" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>Dashboard</p><span class="active-page"></span></a></li>
+                        <li class="active"><a href="index.html" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>Dashboard</p><span class="active-page"></span></a></li>\
+                        <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-user"></span><p>Admins</p><span class="arrow"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="<?php echo(BASE_URL); ?>admins/create.php">Add New Admin</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>admins/index.php">Show All Admins</a></li>
+                            </ul>
+                        </li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-user"></span><p>Users</p><span class="arrow"></span></a>
                             <ul class="sub-menu">
-                                <li><a href="inbox.html">Add New User</a></li>
-                                <li><a href="message-view.html">Show All Users</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>users/create.php">Add New User</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>users/index.php">Show All Users</a></li>
                             </ul>
                         </li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-energy"></span><p>Products</p><span class="arrow"></span></a>
                             <ul class="sub-menu">
-                                <li><a href="inbox.html">Add New Product</a></li>
-                                <li><a href="message-view.html">Show All Products</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>products/create.php">Add New Product</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>products/index.php">Show All Products</a></li>
                             </ul>
                         </li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-bulb"></span><p>Categories</p><span class="arrow"></span></a>

@@ -119,7 +119,7 @@ $obj_user->profile();
                 <div class="panel-footer" style="background-color: white;">
                     <a href="<?php echo(BASE_URL); ?>users/edit.php" class="btn btn-sm semi-circle btn-primary ">Edit Profile</a>
                     <a href="<?php echo(BASE_URL); ?>users/change_password.php" class="btn btn-sm btn-rounded semi-circle btn-danger ">Change Password</a>
-                    <a href="<?php echo(BASE_URL); ?>users/change_profile.php" class="btn btn-sm btn-rounded btn-success semi-circle ">Change Profile Image</a>
+                    <a href="<?php echo(BASE_URL); ?>users/profile_image.php" class="btn btn-sm btn-rounded btn-success semi-circle ">Change Profile Image</a>
                 </div>
             </div>
         </div>

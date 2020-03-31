@@ -9,7 +9,7 @@ require_once "../views/sidebar.php";
         <div class="panel-heading text-center">
             <h3 class="panel-title" style="font-size: 15px;"> 
             <span class="fa fa-user"></span>
-             Users / Add New User</h3>
+             Admins / Add New Admin</h3>
             <hr>
         </div>
         <?php
@@ -19,7 +19,7 @@ require_once "../views/sidebar.php";
             }
         ?>
         <div class="panel-body">
-            <form class="form-horizontal" method="post" action="<?php echo(BASE_URL); ?>users/process/process_add_user.php">
+            <form class="form-horizontal" method="post" action="<?php echo(BASE_URL); ?>admins/process/process_add_admin.php" enctype="multipart/form-data">
                 <?php
                 if(isset($_SESSION['error'])) {
                     echo("<div class='alert alert-danger alert-dismissible'>");
@@ -64,7 +64,7 @@ require_once "../views/sidebar.php";
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary col-md-offset-5" value="Save">
+                    <input type="submit" class="btn btn-primary col-md-offset-5" value="Add Admin">
                 </div>
             </form>
         </div>

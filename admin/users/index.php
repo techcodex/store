@@ -26,9 +26,8 @@ require_once "../views/sidebar.php";
                     </thead>
                     <tbody>
                         <?php
-                        $i = 0;
+                        $i = 1;
                             $users = User::show_all_users();
-                            $i++;
                             foreach($users as $user) {
                                 echo("<tr>");
                                 echo("<td>".$i."</td>");
@@ -51,6 +50,7 @@ require_once "../views/sidebar.php";
                                 }
                                 echo("<td><a href='".BASE_URL."users/edit.php?id=".$user->user_id."'><i class='fa fa-edit'></i></a></td>");
                                 echo("</tr>");
+                                $i++;
                             }
                         ?>
                     </tbody>

@@ -5,6 +5,9 @@ if(session_status() == PHP_SESSION_NONE) {
 define("BASE_FOLDER","/");
 define("BASE_URL","http://".$_SERVER['HTTP_HOST'].BASE_FOLDER);
 define('ITEM_PER_PAGE',6);
+
+define("WEB_BASE_FOLDER","/");
+define("WEB_BASE_URL","http://".$_SERVER['HTTP_HOST'].WEB_BASE_FOLDER);
 if(isset($_COOKIE['obj_user'])) {
     $_SESSION['obj_user'] = $_COOKIE['obj_user'];
 }
