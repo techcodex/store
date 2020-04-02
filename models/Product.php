@@ -249,6 +249,8 @@ class Product
         while ($data = $result->fetch_object()) {
             $products[] = $data;
         }
+        // print_r($products);
+        // die;
         return $products;
     }
     public static function getProduct($id)
@@ -256,7 +258,7 @@ class Product
         $obj_db = self::obj_db();
         $query = "select p.id as id,p.name,p.description,p.features,p.image,p.price,p.quantity,p.brand_id,p.category_id,p.user_id,"
             . " u.user_name, up.first_name,up.last_name,up.gender,up.profile_image, "
-            . "c.name as country_name,s.name as state_name,ci.name as city_name "
+            . " c.name as country_name,s.name as state_name,ci.name as city_name "
             . " from products p "
             . " JOIN users u on p.user_id = u.id "
             . " JOIN user_profile up on u.id = up.user_id "
@@ -268,7 +270,8 @@ class Product
         if ($obj_db->errno) {
             throw new Exception("DB Select Error - $obj_db->error");
         }
-        // die("rows".$result->num_rows);
+        // print_r("rows".$result->num_rows);
+        // die;
         if ($result->num_rows == 0) {
             return;
         }
@@ -390,4 +393,19 @@ class Product
         }
         return $result->fetch_object()->total;
     } 
+    public static function getHomeProducts($offset=0,$limit=0) {
+        $obj_db = self::obj_db();
+        $query = "select * from products p "
+                ." where status = 1 "
+                ." limit $limit offset $offset ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
+        $products = [];
+        while($data = $result->fetch_object()) {
+            $products[] = $data;
+        }
+        return $products;
+    }
 }

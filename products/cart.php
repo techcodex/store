@@ -110,7 +110,7 @@ require_once "../views/header.php";
                                 <i class="fa fa-arrow-left mr-5"></i> Continue shopping
                             </a>
                             <button type="submit" class="btn btn-primary semi-circle btn-md col-md-offset-4">Update</button>
-                            <a href="<?php echo (BASE_URL); ?>products/checkout.php" class="btn btn-danger semi-circle btn-md pull-right">
+                            <a href="#" class="btn btn-danger checkout semi-circle btn-md pull-right">
                                 Checkout <i class="fa fa-arrow-right ml-5"></i>
                             </a>
                         </div><!-- end col -->
@@ -124,3 +124,17 @@ require_once "../views/header.php";
 <?php
 require_once "../views/footer.php";
 ?>
+<script>
+$(document).ready(function(e) {
+    $(".checkout").click(function(e) {
+        e.preventDefault();
+        <?php
+            if($obj_cart->count != 0) {
+                echo("window.location.replace('".BASE_URL."products/checkout.php')");
+            } else {
+                echo("toastr.error('Cart is Empty');");
+            }
+        ?>
+    });
+});
+</script>

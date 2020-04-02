@@ -178,7 +178,7 @@ class User
     }
 
     private function setContact_no($contact_no) {
-        $reg = "/^\d{1,4}\-\d{3}\-\d{7}$/";
+        $reg = "/^\+\d{1}\-\d{3}\-\d{3}\-\d{4}$/";
         if (!preg_match($reg, $contact_no)) {
             throw new Exception("*Invalid / Missing Contact Number");
         }
@@ -457,7 +457,7 @@ class User
     public static function show_all_users()
     {
         $obj_db  = self::obj_db();
-        $query = "select u.id as user_id,u.user_name,u.email,u.status,up.first_name,up.last_name "
+        $query = "select u.id as user_id,u.user_name,u.email,u.status,up.first_name,up.last_name,up.contact_no,up.street_address "
             . " from users u "
             . "JOIN user_profile up on u.id = up.user_id "
             . "ORDER BY user_name ASC ";

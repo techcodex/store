@@ -59,16 +59,18 @@ class Order{
         $obj_db = self::obj_db();
         $this->validateQuantity();
         $now = date("Y-m-d");
+        $clearence = strtotime($now);
+        $clearence = strtotime('+15 day',$clearence);
+        $clearence = date('Y-m-d',$clearence);
         $user_items = [];
         foreach($this->items as $item) {
             $user_items[$item->user_id][] = $item;
         }
-        
         foreach($user_items as $field=>$data) {
             $query = " insert into orders "
-                ."(`id`,`address`,`notes`,`user_id`,`date`,`seller_id`) "
+                ."(`id`,`address`,`notes`,`user_id`,`date`,`seller_id`,`clearence`) "
                 ." values "
-                ." (NULL,'$this->address','$this->notes',$this->user_id,'$now',$field)";
+                ." (NULL,'$this->address','$this->notes',$this->user_id,'$now',$field,'$clearence')";
             $result = $obj_db->query($query);    
             if($obj_db->errno) {
                 throw new Exception("Db insert Error $obj_db->error");
@@ -103,7 +105,8 @@ class Order{
     }
     public static function getBuyerOrders($user_id) {
         $obj_db = self::obj_db();
-        $query = "select * from orders o "
+        $query = "select o.*,u.*,u.id as user_id,o.id as order_id from orders o "
+                ." join users u on u.id = o.user_id "
                 ." where user_id = $user_id ";
         $result = $obj_db->query($query);
         if($obj_db->errno) {
@@ -120,8 +123,47 @@ class Order{
     }
     public static function getSellerOrders($user_id) {
         $obj_db = self::obj_db();
-        $query = " select o.id as order_id,o.date,o.status,o.notes,o.confirm from orders o "
+        $query = " select o.id as order_id,o.date,o.status,o.notes,o.confirm,o.address,u.*,u.status as user_status from orders o "
+                ." JOIN users u on u.id = o.user_id "
                 ." where o.seller_id = $user_id ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        $orders = [];
+        if($result->num_rows == 0) {
+            return $orders;
+        }
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    }
+    public static function getSellerDailyOrders($user_id) {
+        $obj_db = self::obj_db();
+        $now = date("Y-m-d");
+        $query = " select o.id as order_id,o.date,o.status,o.notes,o.confirm,o.address,u.*,u.status as user_status from orders o "
+                ." JOIN users u on u.id = o.user_id "
+                ." where o.seller_id = $user_id AND o.date = '$now'";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        $orders = [];
+        if($result->num_rows == 0) {
+            return $orders;
+        }
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    }
+    public static function getSellerOrderReport($user_id,$from_date,$to_date) {
+        $obj_db = self::obj_db();
+        $now = date("Y-m-d");
+        $query = " select o.id as order_id,o.date,o.status,o.notes,o.confirm,o.address,u.*,u.status as user_status from orders o "
+                ." JOIN users u on u.id = o.user_id "
+                ." where o.seller_id = $user_id AND o.date = '$now' AND date BETWEEN '$from_date' AND '$to_date' ";
         $result = $obj_db->query($query);
         if($obj_db->errno) {
             throw new Exception("Db Select Error - $obj_db->error");
@@ -274,9 +316,10 @@ class Order{
     }
     public static function UserdisputedOrders($id) {
         $obj_db = self::obj_db();
-        $query = "select o.*,o.id as order_id,d.id as disputed_id from orders o "
+        $query = " select o.*,o.id as order_id,d.id as disputed_id from orders o "
                 ." JOIN disputed_orders d on o.id = d.order_id "
-                ." where user_id = $id AND dispute = 1  AND d.status = 0";
+                ." where seller_id = $id AND dispute = 1 AND d.status = 0 ";
+        // die($query);
         $result = $obj_db->query($query);
         if($obj_db->errno) {
             die($obj_db->error);
@@ -298,7 +341,7 @@ class Order{
         $obj_db = self::obj_db();
         $query = "select count(*) as total from orders o "
                 ." JOIN disputed_orders d on o.id = d.order_id "
-                ." where user_id = $id AND dispute = 1  AND d.status = 0";
+                ." where seller_id = $id AND dispute = 1  AND d.status = 0";
         $result = $obj_db->query($query);
         if($obj_db->errno) {
             die($obj_db->error);
@@ -327,5 +370,89 @@ class Order{
             return 0;
         }
         return $result->fetch_object()->total;
+    }
+
+    public static function showAllOrders() {
+        $obj_db = self::obj_db();
+        $now = date("Y-m-d");
+        $query = " select o.*,u.*,o.id as order_id,o.status as order_status from orders o "
+                ." join users u on u.id = o.user_id "
+                ." WHERE o.date = '$now' ";
+        
+        $result = $obj_db->query($query);
+        // print_r($result);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
+        $orders = [];
+        
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    }
+    public static function OrderReport($from_date,$to_date) {
+        $obj_db = self::obj_db();
+        $query = " select u.*,o.*,o.id as order_id from orders o"
+                ." JOIN users u on u.id = o.user_id "
+                ." where date between '$from_date' AND '$to_date' ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
+        $orders = [];
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    }
+    public static function OrderProductReport($from_date,$to_date,$product_id = 0) {
+        $obj_db = self::obj_db();
+        $query = " select o.*,u.*,o.id as order_id,o.status as order_status from orders o "
+                ." JOIN order_items oi on o.id = oi.order_id "
+                ." JOIN users u on u.id = o.user_id "
+                ."where date BETWEEN '$from_date' AND '$to_date' AND oi.product_id = $product_id ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        $orders = [];
+        if($result->num_rows == 0) {
+            return $orders;
+        }
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    }
+    public static function SellerProductOrderReport($user_id,$product_id) {
+        $obj_db = self::obj_db();
+        $query = " select o.id as order_id,o.date,o.status,o.notes,o.confirm,o.address,u.*,u.status as user_status from orders o "
+                ." JOIN users u on u.id = o.user_id "
+                ." JOIN order_items oi on o.id = oi.order_id "
+                ." where o.seller_id = $user_id AND oi.product_id = $product_id ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        $orders = [];
+        if($result->num_rows == 0) {
+            return $orders;
+        }
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    }
+    public static function clearOrder() {
+        $obj_db = self::obj_db();
+        $now = date("Y-m-d");
+        $query = " update orders o set "
+                ." confirm = 1 "
+                ." where '$now' >= o.clearence ";
+        $obj_db->query($query);
+        if($obj_db->errno) {
+            die($obj_db->error);
+        }
     }
 }

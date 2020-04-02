@@ -82,7 +82,7 @@
                                     <span class="fa fa-bar-chart" style="color:#e55e5a"></span>
                                 </div>
                                 <div class="col-md-10">
-                                    <a href="" class="hover">Reports</a>  
+                                    <a href="<?php echo(BASE_URL); ?>users/reports/index.php" class="hover">Reports</a>  
                                 </div>
                             </div>
                         </li>

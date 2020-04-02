@@ -2,6 +2,7 @@
 require_once "../../models/User.php";
 require_once "../../models/Cart.php";
 require_once "../../models/Order.php";
+require_once "../../models/Wishlist.php";
 require_once "../views/header.php";
 require_once "../views/sidebar.php";
 ?>

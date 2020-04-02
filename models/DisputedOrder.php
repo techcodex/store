@@ -62,7 +62,42 @@ class DisputedOrder {
             throw new Exception("Db Update error - $obj_db->error");
         }
     }
-    
+    public static function getDisputedOrder() {
+        $obj_db = self::obj_db();
+        $query = " select u.*,o.*,do.*,o.id as order_id,do.notes as disputed_notes,do.status as disputed_status,do.date as disputed_date from disputed_orders do "
+                ." JOIN orders o on do.order_id = o.id "
+                ." JOIN users u on o.user_id = u.id ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->errno ");
+        }
+        $orders = [];
+        if($result->num_rows == 0) {
+            return $orders;
+        }
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    } 
+    public static function getSellerDisputedOrders($user_id) {
+        $obj_db = self::obj_db();
+        $query = " select u.*,o.*,do.*,o.id as order_id,do.notes as disputed_notes,do.status as disputed_status,do.date as disputed_date from disputed_orders do "
+                ." JOIN orders o on do.order_id = o.id "
+                ." JOIN users u on o.user_id = u.id ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->errno ");
+        }
+        $orders = [];
+        if($result->num_rows == 0) {
+            return $orders;
+        }
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        return $orders;
+    } 
 }
 
 ?>

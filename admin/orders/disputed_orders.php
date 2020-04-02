@@ -1,6 +1,6 @@
 <?php
 require_once "../../models/Admin.php";
-require_once "../../models/Order.php";
+require_once "../../models/DisputedOrder.php";
 require_once "../views/header.php";
 require_once "../views/sidebar.php";
 ?>
@@ -21,15 +21,15 @@ require_once "../views/sidebar.php";
                             <th>Email</th>
                             <th>Address</th>
                             <th>Date</th>
-                            <th>Shipment</th>
                             <th>Notes</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                             $i = 1;
-                            $orders = Order::newOrders();
+                            $orders = DisputedOrder::getDisputedOrder();
                             foreach($orders as $order) {
                                 echo("<tr>");
                                 echo("<td>".$i++."</td>");
@@ -38,17 +38,13 @@ require_once "../views/sidebar.php";
                                 echo("<td>".$order->email."</td>");
                                 echo("<td>".$order->address."</td>");
                                 echo("<td>".$order->date."</td>");
-                                if($order->status == 0) {
-                                    echo("<td><span class='badge badge-danger'>pending</span></td>");
+                                echo("<td>".$order->disputed_notes."</td>");
+                                if($order->disputed_status == 0) {
+                                    echo("<td><i class='badge badge-danger'>Pending</i></td>");
                                 } else {
-                                    echo("<td><span class='badge badge-danger'>pending</span></td>");
+                                    echo("<td><i class='badge badge-info'>Resolved</i></td>");
                                 }
-                                if(!empty($order->notes)) {
-                                    echo("<td>".$order->notes."</td>");
-                                } else {
-                                    echo("<td>N/A</td>");
-                                }
-                                echo("<td><a href='#' style='color:green' class='view' title='View Order Products' data-id='".$order->id."'><i class='fa fa-eye'></i></a></td>");
+                                echo("<td><a href='#' style='color:green' class='view' title='View Order Products' data-id='".$order->order_id."'><i class='fa fa-eye'></i></a></td>");
                                 echo("</tr>");
                             }
 

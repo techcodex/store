@@ -36,10 +36,11 @@
                             <ul class="sub-menu">
                                 <li><a href="<?php echo(BASE_URL); ?>orders/new_orders.php">New Orders</a></li>
                                 <li><a href="<?php echo(BASE_URL); ?>orders/delivered.php">Delivered Orders</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>orders/disputed_order.php">Disputed Orders</a></li>
                             </ul>
                         </li>
                         <li class=""><a href="<?php echo(BASE_URL); ?>messages/index.php" class="waves-effect waves-button"><span class="menu-icon icon-envelope"></span><p>Messages</p></a>
-                        <li class=""><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-pie-chart"></span><p>Reports</p></a>
+                        <li class=""><a href="<?php echo(BASE_URL); ?>reports/index.php" class="waves-effect waves-button"><span class="menu-icon icon-pie-chart"></span><p>Reports</p></a>
                         </li>
                     </ul>
                 </div><!-- Page Sidebar Inner -->

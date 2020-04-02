@@ -19,7 +19,7 @@ if(isset($_SESSION['errors'])) {
         </div>
         
         <div class="panel-body">
-            <form class="form-horizontal" method="POST" action="<?php echo(BASE_URL); ?>brands/process/process_add_admin.php" enctype="multipart/form-data">
+            <form class="form-horizontal" method="POST" action="<?php echo(BASE_URL); ?>brands/process/process_add_brand.php" enctype="multipart/form-data">
                 <div class="form-group <?php if(isset($errors['name'])) { echo("has-error"); } ?>">
                     <label for="input-rounded" class="col-sm-2 control-label">Brand Name</label>
                     <div class="col-sm-10">

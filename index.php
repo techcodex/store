@@ -15,212 +15,22 @@ require_once "views/slider.php";
             <h3 class="text-center"> <span class="text-danger ">Newest</span> Products</h3>
         </div>
         <div class="spacer-20 no-border"></div>
-        <div class="row column-4">
+        <div class="row column-4" >
+            <div id="products">
 
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/women_01.jpg" alt="">
-                            </a>
-                        </figure>
-                        <div class="icons">
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
+            </div>
 
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/women_01.jpg" alt="">
-                            </a>
-                        </figure>
-                        <div class="icons">
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/bags_01.jpg" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/fashion_01.jpg" alt="">
-                            </a>
-                        </figure>
-                        <div class="icons">
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/hoseholds_05.jpg" alt="">
-                            </a>
-                        </figure>
-                        <div class="icons">
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/kids_01.jpg" alt="">
-                            </a>
-                        </figure>
-                        <div class="icons">
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/shoes_01.jpg" alt="">
-                            </a>
-                        </figure>
-                        <div class="icons">
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail store style1">
-                    <div class="header">
-                        <figure class="layer">
-                            <a href="javascript:void(0);">
-                                <img src="img/products/technology_02.jpg" alt="">
-                            </a>
-                        </figure>
-                        <div class="icons">
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-gift"></i></a>
-                            <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="regular"><a href="shop-single-product-v1.html">Lorem Ipsum dolor sit</a></h6>
-                        <div class="price">
-                            <small class="amount off">$68.99</small>
-                            <span class="amount text-primary">$59.99</span>
-                        </div>
-                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
-                    </div><!-- end caption -->
-                </div><!-- end thumbnail -->
-            </div><!-- end col -->
-        </div><!-- end row -->
-
-
+        
+        <!--End Row-->
+    </div><!-- end container -->
+    <br>
         <hr class="spacer-10 no-border" />
         <!-- Start Row-->
         <div class="row">
-            <button class="btn btn-danger btn-lg col-md-offset-5" style="">Load More</button>
+            <button class="btn btn-danger btn-lg col-md-offset-5" id="loadProducts" style="">Load More
+            <span class="loader"></span>
+            </button>
         </div>
-        <!--End Row-->
-    </div><!-- end container -->
 </section>
 <!-- end section -->
 <!-- start section -->
@@ -444,3 +254,66 @@ require_once "views/slider.php";
 <?php
 require "views/footer.php"
 ?>
+
+<script>
+    var offset = 0;
+    var limit = 3;
+    $(document).ready(function(e) {    
+        getProduct(offset,limit);
+        $("#loadProducts").click(function(e) {
+            offset += 3;
+            getProduct(offset,limit);
+        });
+    });
+
+    function getProduct(offset,limit) {
+        var data = {
+            offset:offset,
+            limit:limit,
+        }; 
+        $.ajax({
+            url:"<?php echo(BASE_URL); ?>process/process_products.php",
+            data:data,
+            dataType:'JSON',
+            type:'POST',
+            beforeSend:function(xhr) {
+                $(".loader").html("<img src='<?php echo(BASE_URL); ?>img/loader.gif' alt='' width='30'>")
+            },
+            complete:function(jqXHR,textStatus) {
+                if(jqXHR.status == 200) {
+                    var result = JSON.parse(jqXHR.responseText);
+                    var output = "";
+                    if(result.length != 0) {
+                        result.forEach(function(product) {
+                            output += '<div class="col-sm-6 col-md-3">'
+                                    +'<div class="thumbnail store style1">'
+                                    +'<div class="header">'
+                                    +'<figure class="layer">'
+                                    +'<a href="javascript:void(0);">'
+                                    +'<img src="<?php echo(BASE_URL) ?>img/user_products/'+product.image+'" style="width:200px;height:200px;" alt="image">'
+                                    +'</a>'
+                                    +'</figure>'
+                                    +'<div class="icons">'
+                                    +'<a class="icon semi-circle" href="<?php echo(BASE_URL); ?>products/process/process_wishlist.php?action=add&product_id='+product.id+'"><i class="fa fa-heart-o"></i></a>'
+                                    +'<a class="icon semi-circle" href="<?php echo(BASE_URL); ?>"><i class="fa fa-gift"></i></a>'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'<div class="caption">'
+                                    +'<h6 class="regular"><a href="shop-single-product-v1.html">'+product.name+'</a></h6>'
+                                    +'<div class="price">'
+                                    +'<span class="amount text-primary">$ '+product.price+'</span>'
+                                    +'</div>'
+                                    +'<a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'</div>';
+                        });
+                        $("#products").append(output);
+                    }
+                }
+                $(".loader").html("");
+            }
+        });
+    }
+</script>
