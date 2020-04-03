@@ -21,6 +21,7 @@ if(isset($_POST['action'])) {
             $item = new Item($product_id,1,$product->user_id);
             try{
                 $obj_cart->add_to_cart($item);
+                header("Location:".BASE_URL."products/index.php");
             } catch(Exception $ex) {
                 $_SESSION['error'] = $ex->getMessage();
             }
@@ -28,6 +29,7 @@ if(isset($_POST['action'])) {
         case "update_cart":
             try{
                 $obj_cart->update_cart($_POST['qtys']);
+                header("Location:".BASE_URL."products/cart.php");
             } catch(Exception $ex) {
                 $_SESSION['error'] = $ex->getMessage();
             }
@@ -38,15 +40,16 @@ if(isset($_GET['action'])) {
     switch ($_GET['action']) {
         case "empty_cart":
             $obj_cart->empty_cart();
+            header("Location:".BASE_URL."products/cart.php");
             break;
         case "remove_item":
             $product_id = isset($_GET['product_id']) ? $_GET['product_id'] : 0;
             $product = Product::getProduct($product_id);
             $item = new Item($product_id,1,$product->user_id);
             $obj_cart->remove_cart($item);
+            header("Location:".BASE_URL."products/cart.php");
             break;
     }
 }
 $_SESSION['obj_cart'] = serialize($obj_cart);
-header("Location:".BASE_URL."products/index.php");
 ?>

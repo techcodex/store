@@ -36,22 +36,22 @@ require_once "views/header.php";
                         <figure>
                             <img src="img/blog/blog_01.jpg" alt="" />
                         </figure>
-                        <h5>Lorem ipsum dolor sit</h5>
-                        <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <h5>Secure</h5>
+                        <p>We provide the safest and secure way to handle the payments.</p>
                     </div><!-- end col -->
                     <div class="col-sm-4">
                         <figure>
                             <img src="img/blog/blog_02.jpg" alt="" />
                         </figure>
-                        <h5>Consectetur adipiscing</h5>
-                        <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <h5>Reliabale</h5>
+                        <p>We care about our users so we provide the reliable way to buy and sell the products.</p>
                     </div><!-- end col -->
                     <div class="col-sm-4">
                         <figure>
                             <img src="img/blog/blog_03.jpg" alt="" />
                         </figure>
-                        <h5>Lorem ipsum dolor sit</h5>
-                        <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <h5>Fast</h5>
+                        <p>The fastest way to buy and sell product.</p>
                     </div><!-- end col -->
                 </div><!-- end row -->
                 

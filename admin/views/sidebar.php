@@ -1,7 +1,7 @@
 <div class="page-sidebar sidebar">
                 <div class="page-sidebar-inner slimscroll">
                     <ul class="menu accordion-menu">
-                        <li class="active"><a href="index.html" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>Dashboard</p><span class="active-page"></span></a></li>\
+                        <li class="active"><a href="<?php echo(BASE_URL); ?>index.php" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>Dashboard</p><span class="active-page"></span></a></li>\
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-user"></span><p>Admins</p><span class="arrow"></span></a>
                             <ul class="sub-menu">
                                 <li><a href="<?php echo(BASE_URL); ?>admins/create.php">Add New Admin</a></li>
@@ -36,7 +36,7 @@
                             <ul class="sub-menu">
                                 <li><a href="<?php echo(BASE_URL); ?>orders/new_orders.php">New Orders</a></li>
                                 <li><a href="<?php echo(BASE_URL); ?>orders/delivered.php">Delivered Orders</a></li>
-                                <li><a href="<?php echo(BASE_URL); ?>orders/disputed_order.php">Disputed Orders</a></li>
+                                <li><a href="<?php echo(BASE_URL); ?>orders/disputed_orders.php">Disputed Orders</a></li>
                             </ul>
                         </li>
                         <li class=""><a href="<?php echo(BASE_URL); ?>messages/index.php" class="waves-effect waves-button"><span class="menu-icon icon-envelope"></span><p>Messages</p></a>
@@ -50,7 +50,7 @@
                 <div class="page-title" style="border-bottom: 1px solid lightgrey;padding:15px;">
                     <div class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="<?php echo(BASE_URL); ?>index.php">Home</a></li>
                             <li class="active">Dashboard</li>
                         </ol>
                     </div>

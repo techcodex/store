@@ -33,7 +33,7 @@ require_once "../views/sidebar.php";
                             <option value="2">2. Product Stock Report</option>
                             <option value="3">3. Daily Order Report</option>
                             <option value="4">4. User Order Report</option>
-                            <option value="5">5. Montlly Order Report</option>
+                            <option value="5">5. Monthly Order Report</option>
                             <option value="6">6. Weekly Order Report</option>
                             <option value="7">7. Yearly Order Report</option>
                             <option value="8">8. Product Monthly Report</option>

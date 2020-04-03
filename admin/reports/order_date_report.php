@@ -29,7 +29,7 @@ require_once "views/header.php";
     <?php
         $i=1;
         $orders = Order::OrderReport($from_date,$to_date);
-        if(cunt($orders) == 0) {
+        if(count($orders) == 0) {
             echo("<tr><td colspan='7' class='text-center'>No Order Found</td></tr>");
         } else {
             foreach($orders as $order) {

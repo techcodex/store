@@ -17,6 +17,7 @@ if(isset($_SESSION['errors'])) {
     $errors = $_SESSION['errors'];
     unset($_SESSION['errors']);
 }
+$obj_user = unserialize($_SESSION['obj_user']);
 ?>
 <div class="row" style="font-size:15px;">
         <div class="form-group row">
@@ -50,7 +51,7 @@ $(document).ready(function(e) {
         var val = $(this).val();
         if(val == 1) {
             var output = "";
-            output += "<form action='<?php echo(BASE_URL); ?>reports/order_report.php' method='post'>";
+            output += "<form action='<?php echo(BASE_URL); ?>users/reports/daily_report.php' method='post'>";
             output +="<input type='submit' value='Check Report' class='btn btn-danger col-md-offset-5' style='margin-top:10px;'>";
             output +="</form>";
             $(".data").html(output);
@@ -122,7 +123,7 @@ $(document).ready(function(e) {
             output += "<div class='col-md-10'>";
             output += "<select class='form-control' style='margin-top:10px;' name='product_id'>";
             output += "<option value=''>--Select Product--</option>";
-            output += "<?php $products = Product::showAllProductsAdmin(); foreach($products as $product) { echo("<option value='".$product->product_id."'>".$product->product_name."</option>"); } ?> ";
+            output += "<?php $products = Product::userProducts($obj_user->user_id); foreach($products as $product) { echo("<option value='".$product->product_id."'>".$product->product_name."</option>"); } ?> ";
             output += "</select>";
             output += "</div>";
             output += "</div>";

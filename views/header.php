@@ -33,6 +33,8 @@ $public_pages = [
 $restricted_pages = [
     BASE_FOLDER."users/account.php",
     BASE_FOLDER."users/edit.php",
+    BASE_FOLDER."products/wishlist.php",
+    BASE_FOLDER."products/checkout.php",
 ];
 $current = $_SERVER['PHP_SELF'];
 
@@ -161,7 +163,7 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
 
             <ul class="list-inline pull-left hidden-sm hidden-xs">
                 <li><i class="fa fa-phone mr-5"></i>+1 (260) 702-1333</li>
-                <li><i class="fa fa-envelope mr-5"></i>info@store.com</li>
+                <li><i class="fa fa-envelope mr-5"></i>info@smartstore.com</li>
             </ul>
             <ul class="topBarNav pull-right">
                 <?php
@@ -212,7 +214,7 @@ if(in_array($current,$public_pages) && $obj_user->loggedin) {
                                 echo("<li><a href='".BASE_URL."register.php'>Create Account</a></li>");
                             } 
                             else {
-                                echo("<li><a href=''>Account Setting</a></li>");
+                                echo("<li><a href='".BASE_URL."users/account.php'>Account Setting</a></li>");
                             }
                         ?>
                         <li class="divider"></li>
