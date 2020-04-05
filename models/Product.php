@@ -408,4 +408,13 @@ class Product
         }
         return $products;
     }
+    public static function countProducts() {
+        $obj_db = self::obj_db();
+        $query = "select count(*) as total from poducts ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db count errror - $obj_db->error");
+        }
+        return $result->fetch_object()->total;
+    }
 }

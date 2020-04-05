@@ -567,4 +567,13 @@ class User
             die($obj_db->error);
         }
     }
+    public static function countUsers() {
+        $obj_db = self::obj_db();
+        $query = "select count(*) as total from users ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select error-  $obj_db->error");
+        }
+        return $result->fetch_object()->total;
+    }
 }

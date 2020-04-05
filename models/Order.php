@@ -486,4 +486,44 @@ class Order{
             die($obj_db->error);
         }
     }
+    public static function countNewOrders() {
+        $obj_db = self::obj_db();
+        $query = "select count(*) as total from orders "
+                ." where status = 0 ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        return $result->fetch_object()->total;
+    }
+    public static function countDeliveredOrders() {
+        $obj_db = self::obj_db();
+        $query = "select count(*) as total from orders "
+                ." where status = 1 ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        return $result->fetch_object()->total;
+    }
+    public static function countNewDisputedOrders() {
+        $obj_db = self::obj_db();
+        $query = "select * from disputed_orders "
+                ." where status = 0";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        return $result->fetch_object()->total;
+    }
+    public static function countResolveDisputedOrders() {
+        $obj_db = self::obj_db();
+        $query = "select * from disputed_orders "
+                ." where status = 1 ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        return $result->fetch_object()->total;
+    }
 }
