@@ -83,7 +83,7 @@ require_once "../views/header.php";
                                             if ($item->item_description == "") {
                                                 echo ('<p>N/A</p>');
                                             } else {
-                                                echo ('<p>' . $product->description . '</p>');
+                                                echo ('<p>' . $item->item_description . '</p>');
                                             }
                                             echo ('</td>');
                                             echo ('<td>');
