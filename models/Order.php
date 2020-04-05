@@ -508,7 +508,7 @@ class Order{
     }
     public static function countNewDisputedOrders() {
         $obj_db = self::obj_db();
-        $query = "select * from disputed_orders "
+        $query = "select count(*) as total from disputed_orders "
                 ." where status = 0";
         $result = $obj_db->query($query);
         if($obj_db->errno) {
@@ -518,7 +518,7 @@ class Order{
     }
     public static function countResolveDisputedOrders() {
         $obj_db = self::obj_db();
-        $query = "select * from disputed_orders "
+        $query = "select count(*) as total from disputed_orders "
                 ." where status = 1 ";
         $result = $obj_db->query($query);
         if($obj_db->errno) {
