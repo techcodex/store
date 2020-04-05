@@ -75,7 +75,7 @@ if(in_array($current,$restricted_pages) && !$obj_admin->loggedin) {
                         </a>
                     </div>
                     <div class="logo-box">
-                        <a href="index.html" class="logo-text"><span>Smart Store</span></a>
+                        <a href="<?php echo(BASE_URL); ?>index.php" class="logo-text"><span>Smart Store</span></a>
                     </div><!-- Logo Box -->
                     <div class="search-button">
                         <a href="javascript:void(0);" class="show-search"><i class="icon-magnifier"></i></a>

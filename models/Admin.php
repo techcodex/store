@@ -294,7 +294,7 @@ class Admin
         $this->password = null;
         $this->admin_id = $data->id;
         $this->loggedin = true;
-        $this->image = $data->profile_image;
+        $this->image = $data->image;
         $obj_admin = serialize($this);
         $_SESSION['obj_admin'] = $obj_admin;
 

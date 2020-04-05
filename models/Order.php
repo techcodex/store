@@ -122,8 +122,9 @@ class Order{
         return $orders;
     }
     public static function getSellerOrders($user_id) {
+        // die($user_id);
         $obj_db = self::obj_db();
-        $query = " select o.id as order_id,o.date,o.status,o.notes,o.confirm,o.address,u.*,u.status as user_status from orders o "
+        $query = " select o.id as order_id,o.date,o.status as order_status,o.notes,o.confirm,o.address,u.*,u.status as user_status from orders o "
                 ." JOIN users u on u.id = o.user_id "
                 ." where o.seller_id = $user_id ";
         $result = $obj_db->query($query);
@@ -137,6 +138,36 @@ class Order{
         while($data = $result->fetch_object()) {
             $orders[] = $data;
         }
+        // echo("<pre>");
+        // print_r($orders);
+        // echo("</pre>");
+        // die;
+        return $orders;
+    }
+
+    public static function getSellerNewOrders($user_id) {
+        // die($user_id);
+        $obj_db = self::obj_db();
+        $query = " select o.id as order_id,o.date,o.status as order_status,o.notes,o.confirm,o.address,u.*,u.status as user_status from orders o "
+                ." JOIN users u on u.id = o.user_id "
+                ." where o.seller_id = $user_id "
+                ." AND "
+                ." o.status = 0 ";
+        $result = $obj_db->query($query);
+        if($obj_db->errno) {
+            throw new Exception("Db Select Error - $obj_db->error");
+        }
+        $orders = [];
+        if($result->num_rows == 0) {
+            return $orders;
+        }
+        while($data = $result->fetch_object()) {
+            $orders[] = $data;
+        }
+        // echo("<pre>");
+        // print_r($orders);
+        // echo("</pre>");
+        // die;
         return $orders;
     }
     public static function getSellerDailyOrders($user_id) {

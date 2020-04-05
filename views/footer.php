@@ -57,32 +57,22 @@
                         this way customer will be able to check weather the product is same as they saw on Store.</p>
 
                     <hr class="spacer-10 no-border">
-
-                    <ul class="social-icons">
-                        <li class="facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                        <li class="twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                        <li class="dribbble"><a href="javascript:void(0);"><i class="fa fa-dribbble"></i></a></li>
-                        <li class="linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                        <li class="youtube"><a href="javascript:void(0);"><i class="fa fa-youtube"></i></a></li>
-                        <li class="behance"><a href="javascript:void(0);"><i class="fa fa-behance"></i></a></li>
-                    </ul>
                 </div><!-- end col -->
                 <div class="col-sm-3">
                     <h5 class="title">My Account</h5>
                     <ul class="list alt-list">
-                        <li><i class="fa fa-angle-right"></i><a href="">Login</a></li>
-                        <li><a href=""><i class="fa fa-angle-right"></i>Wishlist</a></li>
-                        <li><a href=""><i class="fa fa-angle-right"></i>My Cart</a></li>
-                        <li><a href=""><i class="fa fa-angle-right"></i>Checkout</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="<?php echo(BASE_URL); ?>login.php">Login</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/wishlist.php"><i class="fa fa-angle-right"></i>Wishlist</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/cart.php"><i class="fa fa-angle-right"></i>My Cart</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>products/checkout.php"><i class="fa fa-angle-right"></i>Checkout</a></li>
                     </ul>
                 </div><!-- end col -->
                 <div class="col-sm-3">
                     <h5 class="title">Information</h5>
                     <ul class="list alt-list">
-                        <li><a href=""><i class="fa fa-angle-right"></i>Home</a></li>
-                        <li><a href=""><i class="fa fa-angle-right"></i>About Us</a></li>
-                        <li><a href=""><i class="fa fa-angle-right"></i>Stores</a></li>
-                        <li><a href=""><i class="fa fa-angle-right"></i>Contact Us</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>home.php"><i class="fa fa-angle-right"></i>Home</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>aboutus.php"><i class="fa fa-angle-right"></i>About Us</a></li>
+                        <li><a href="<?php echo(BASE_URL); ?>contactus.php"><i class="fa fa-angle-right"></i>Contact Us</a></li>
                     </ul>
                 </div><!-- end col -->
                 <div class="col-sm-3">
@@ -95,7 +85,7 @@
 
             <div class="row text-center">
                 <div class="col-sm-12">
-                    <p class="text-sm">© 2019. Made with <i class="fa fa-heart text-danger"></i> by <a href="">Smart
+                    <p class="text-sm">© 2020. Made with <i class="fa fa-heart text-danger"></i> by <a href="">Smart
                             Store</a></p>
                 </div><!-- end col -->
             </div><!-- end row -->

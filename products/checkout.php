@@ -285,22 +285,7 @@ $obj_user->profile();
                                                         </div><!-- end panel-heading -->
                                                         <div id="collapseQuestionOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="questionOne">
                                                             <div class="panel-body">
-                                                                <p>Lorem ipsum dolor sit amet, link adipisicing elit. Dicta voluptatem, tenetur eum tempore minus libero voluptates eos doloremque. Dolore minima rem consequuntur exercitationem quaerat deleniti repellendus enim necessitatibus mollitia tenetur?</p>
-                                                            </div><!-- end panel-body -->
-                                                        </div><!-- end collapse -->
-                                                    </div><!-- end panel -->
-
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="questionTwo">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" data-toggle="collapse" data-parent="#question" href="#collapseQuestionTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                    Can I use gift card to pay for my purchase?
-                                                                </a>
-                                                            </h4>
-                                                        </div><!-- end panel-heading -->
-                                                        <div id="collapseQuestionTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionTwo">
-                                                            <div class="panel-body">
-                                                                <p>Lorem ipsum dolor sit amet, link adipisicing elit. Dicta voluptatem, tenetur eum tempore minus libero voluptates eos doloremque. Dolore minima rem consequuntur exercitationem quaerat deleniti repellendus enim necessitatibus mollitia tenetur?</p>
+                                                                <p>You can use PayPal for the payments.</p>
                                                             </div><!-- end panel-body -->
                                                         </div><!-- end collapse -->
                                                     </div><!-- end panel -->
@@ -315,7 +300,7 @@ $obj_user->profile();
                                                         </div><!-- end panel-heading -->
                                                         <div id="collapseQuestionThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionThree">
                                                             <div class="panel-body">
-                                                                <p>Lorem ipsum dolor sit amet, link adipisicing elit. Dicta voluptatem, tenetur eum tempore minus libero voluptates eos doloremque. Dolore minima rem consequuntur exercitationem quaerat deleniti repellendus enim necessitatibus mollitia tenetur?</p>
+                                                                <p>You can receive your order in 10 to 15 working days.</p>
                                                             </div><!-- end panel-body -->
                                                         </div><!-- end collapse -->
                                                     </div><!-- end panel -->

@@ -84,7 +84,7 @@ class DisputedOrder {
         $obj_db = self::obj_db();
         $query = " select u.*,o.*,do.*,o.id as order_id,do.notes as disputed_notes,do.status as disputed_status,do.date as disputed_date from disputed_orders do "
                 ." JOIN orders o on do.order_id = o.id "
-                ." JOIN users u on o.user_id = u.id ";
+                ." JOIN users u on o.user_id = $user_id ";
         $result = $obj_db->query($query);
         if($obj_db->errno) {
             throw new Exception("Db Select Error - $obj_db->errno ");
