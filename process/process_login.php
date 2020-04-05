@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             header("Location:".BASE_URL."index.php");
         } catch (Exception $ex) {
             $_SESSION['error'] = $ex->getMessage();
-            header("Location:../login.php");
+            header("Location:".BASE_URL."login.php");
         }
     } else {
         $_SESSION['error'] = "Fill All Required Fileds";
