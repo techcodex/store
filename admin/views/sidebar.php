@@ -1,7 +1,7 @@
 <div class="page-sidebar sidebar">
                 <div class="page-sidebar-inner slimscroll">
                     <ul class="menu accordion-menu">
-                        <li class="active"><a href="index.html" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>Dashboard</p><span class="active-page"></span></a></li>\
+                        <li class="active"><a href="<?php echo(BASE_URL); ?>dashboard.php" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>Dashboard</p><span class="active-page"></span></a></li>
                         <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon icon-user"></span><p>Admins</p><span class="arrow"></span></a>
                             <ul class="sub-menu">
                                 <li><a href="<?php echo(BASE_URL); ?>admins/create.php">Add New Admin</a></li>
